@@ -4,3 +4,7 @@
     roles:
       - init
 
+  - name: Web Server
+    hosts: web_servers
+    roles:
+      - nginx
