@@ -3,6 +3,7 @@
     hosts: web_servers
     roles:
       - nginx
+      - agama
 
   - name: Initial setup
     hosts: all
