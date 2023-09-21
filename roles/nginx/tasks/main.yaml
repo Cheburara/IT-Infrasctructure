@@ -14,3 +14,10 @@
     name: nginx
     state: started
     enabled: yes
+
+- name: Copy custom Nginx default configuration
+  copy:
+    src: roles/nginx/files/default/uwsgi_frontend.conf
+    dest: /etc/nginx/sites-enabled/default
+  notify: Reload nginx
+  become: yes

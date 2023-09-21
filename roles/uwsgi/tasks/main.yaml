@@ -26,4 +26,3 @@
     state: started
     enabled: yes
   become: yes
-  
