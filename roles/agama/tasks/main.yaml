@@ -11,6 +11,11 @@
     state: directory
   become: yes
 
+# - name: Update package lists
+#   apt:
+#     update_cache: yes
+#   become: yes
+
 - name: Install AGAMA Dependencies using APT
   apt:
     name: python3-flask-sqlalchemy
@@ -22,7 +27,6 @@
     url: "https://raw.githubusercontent.com/hudolejev/agama/master/agama.py"
     dest: "/opt/agama/agama.py"
   become: yes
-
 
 
 
