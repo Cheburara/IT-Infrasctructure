@@ -1,0 +1,27 @@
+- name: Install uWSGI Packages
+  apt:
+    name: uwsgi
+    name: uwsgi-plugin-python3
+    state: present
+  become: yes
+
+- name: Ensure /etc/uwsgi/apps-enabled/agama.ini is owned by agama
+  file:
+    path: /etc/uwsgi/apps-enabled/agama.ini
+    owner: agama
+    group: agama
+  become: yes
+
+- name: Copy uWSGI config for AGAMA application
+  copy:
+    src: roles/uwsgi/files/agama.ini
+    dest: /etc/uwsgi/apps-enabled/agama.ini
+  notify: Restart uWSGI
+  become: yes
+
+- name: Ensure uWSGI service is running
+  systemd:
+    name: uwsgi
+    state: started
+    enabled: yes
+  become: yes
