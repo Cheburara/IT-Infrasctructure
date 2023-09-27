@@ -11,18 +11,20 @@
   become: yes
   
 
-- name: Ensure /etc/uwsgi/apps-enabled/agama.ini is owned by agama
-  file:
-    path: /etc/uwsgi/apps-enabled/agama.ini
-    owner: agama
-    group: agama
-    state: directory
-  become: yes
+# - name: Ensure /etc/uwsgi/apps-enabled/agama.ini is owned by agama
+#   file:
+#     path: /etc/uwsgi/apps-enabled/agama.ini
+#     owner: agama
+#     group: agama
+#     state: directory
+#   become: yes
 
 - name: Copy uWSGI config for AGAMA application
   template:
     src: agama.ini.j2
     dest: /etc/uwsgi/apps-enabled/agama.ini
+    owner: agama
+    group: agama
   notify: Restart uWSGI
   become: yes
 
