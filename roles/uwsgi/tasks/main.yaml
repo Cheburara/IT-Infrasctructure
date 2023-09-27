@@ -1,7 +1,6 @@
 - name: Install uWSGI Packages
   apt:
     name: uwsgi
-    # name: uwsgi-plugin-python3
     state: present
   become: yes
 

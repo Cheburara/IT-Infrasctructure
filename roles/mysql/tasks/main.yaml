@@ -12,7 +12,6 @@
     notify: Reload Mysql
   
   
-  
   - name: Install PyMySQL package
     apt:
       name: python3-pymysql
