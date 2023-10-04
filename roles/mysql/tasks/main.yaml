@@ -9,7 +9,6 @@
       name: mysql
       state: started
       enabled: yes
-    notify: Reload Mysql
   
   
   - name: Install PyMySQL package
@@ -17,6 +16,15 @@
       name: python3-pymysql
       state: present
     become: yes
+
+  - name: Create override.cnf file
+    template:
+      src: mysql_override.cnf.j2
+      dest: /etc/mysql/mysql.conf.d/override.cnf
+      owner: mysql
+      group: mysql
+    notify: Restart Mysql
+    
 
   - name: MySQL database
     community.mysql.mysql_db:
