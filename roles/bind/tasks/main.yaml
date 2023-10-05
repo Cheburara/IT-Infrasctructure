@@ -1,0 +1,25 @@
+- name: Install Bind9 package
+  apt:
+    name: bind9
+    state: present
+  become: yes
+
+- name: Include DNS Access Variables
+  include_vars:
+    file: vars/dns_access_vars.yml
+
+- name: Set allowed_networks variable
+  set_fact:
+    allowed_networks: "{{ allowed_networks }}"
+
+- name: Set dns_forwarders variable
+  set_fact:
+    dns_forwarders: "{{ dns_forwarders }}"
+
+
+- name: Create override.named.conf.options file
+  template:
+    src: bind_override.cnf.j2
+    dest: /etc/bind/named.conf.options.override
+  notify: Restart bind9
+
