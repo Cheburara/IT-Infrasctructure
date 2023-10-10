@@ -1,4 +1,3 @@
-
 options {
 
     forwarders {
@@ -7,4 +6,19 @@ options {
         {% endfor %}
     };
 
+    allow-query {
+        {% for network in allowed_networks %}
+        {{ network }};
+        {% endfor %}
+    };
+
 };
+
+zone "{{ startup_name }}" {
+    type master;
+    file "/var/lib/bind/db.{{ startup_name }}. "; 
+};
+
+statistics-channels {
+    inet 127.0.0.1 port 8053; 
+}; 

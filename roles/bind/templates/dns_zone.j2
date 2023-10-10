@@ -1,0 +1,16 @@
+; BIND data file for {{ startup_name }} zone
+;
+$TTL    604800
+@       IN      SOA     ns.{{ startup_name }}. admin.{{ startup_name }}. (
+                             2023092401         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+
+@       IN      NS      ns.{{ startup_name }}.
+
+; A records
+ns          IN  A   {{ hostvars['cheburara-2']['ansible_default_ipv4']['address'] }}
+cheburara-1 IN  A   {{ hostvars['cheburara-1']['ansible_default_ipv4']['address'] }}
+cheburara-2 IN  A   {{ hostvars['cheburara-2']['ansible_default_ipv4']['address'] }}

@@ -1,0 +1,4 @@
+- name: Configure /etc/resolv.conf
+  template:
+    src: resolv.cnf.j2
+    dest: /etc/resolv.conf

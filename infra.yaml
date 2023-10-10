@@ -9,10 +9,16 @@
     roles:
       - mysql
   
+  - name: Resolver
+    hosts: all
+    roles:
+      - resolver
+
   - name: DNS server
     hosts: dns_servers
     roles:
       - bind
+  
 
   - name: Web Server
     hosts: web_servers

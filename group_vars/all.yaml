@@ -1,4 +1,4 @@
-mysql_host: 192.168.42.112
+mysql_host: 192.168.43.20
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -8,4 +8,17 @@ mysql_password: !vault |
           30653266343239333935353438646236653236616636626564326533653130353563346264663635
           6536363263396661620a363032393333616138626266663661643830623462333138306238646130
           6532
+
+startup_name: chebariss
+
+allowed_networks:
+  - 192.168.42.0/23
+  - 127.0.0.0/8
+
+dns_forwarders:
+  - 1.1.1.1
+  - 8.8.8.8
+  - 9.9.9.9
+
+
           
