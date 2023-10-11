@@ -3,6 +3,7 @@
       name: mysql-server
       state: present
     become: yes
+    tags: mysql
 
   - name: Ensure MySQL service is started and enabled
     service:

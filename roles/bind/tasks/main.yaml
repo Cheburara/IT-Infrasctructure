@@ -2,6 +2,7 @@
   apt:
     name: bind9
     state: present
+  tags: bind9
 
 - name: Create configuration bind9 file
   template:

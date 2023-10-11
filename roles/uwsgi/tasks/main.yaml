@@ -9,7 +9,6 @@
     name: uwsgi-plugin-python3
     state: present
   become: yes
-  
 
 # - name: Ensure /etc/uwsgi/apps-enabled/agama.ini is owned by agama
 #   file:

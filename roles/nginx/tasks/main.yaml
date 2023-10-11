@@ -20,4 +20,3 @@
     src: roles/nginx/files/default/uwsgi_frontend.conf
     dest: /etc/nginx/sites-enabled/default
   notify: Reload Nginx
-  become: yes

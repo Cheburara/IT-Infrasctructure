@@ -3,23 +3,25 @@
     hosts: all
     roles:
       - init
+    tags: always
   
   - name: Database server
     hosts: db_servers
     roles:
       - mysql
+    tags: mysql
 
   - name: DNS server
     hosts: dns_servers
     roles:
       - bind
+    tags: bind9
 
   - name: Resolver
     hosts: all
     roles:
       - resolver
   
-
   - name: Web Server
     hosts: web_servers
     roles:

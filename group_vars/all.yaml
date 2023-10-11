@@ -1,4 +1,4 @@
-mysql_host: 192.168.
+mysql_host: cheburara-2
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -9,7 +9,7 @@ mysql_password: !vault |
           6536363263396661620a363032393333616138626266663661643830623462333138306238646130
           6532
 
-startup_name: chebariss
+startup_name: chebariss.io
 
 allowed_networks:
   - 192.168.42.0/23

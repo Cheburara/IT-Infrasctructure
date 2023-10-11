@@ -20,19 +20,16 @@
   apt:
     name: python3-flask-sqlalchemy
     state: present
-  become: yes
 
 - name: Install AGAMA Dependencies using APT 2
   apt:
     name: python3-pymysql  
     state: present
-  become: yes
 
 - name: Download AGAMA Application 
   get_url:
     url: "https://raw.githubusercontent.com/hudolejev/agama/master/agama.py"
     dest: "/opt/agama/agama.py"
-  become: yes
 
 
 
