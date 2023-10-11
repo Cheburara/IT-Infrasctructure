@@ -1,5 +1,4 @@
 nameserver {{ hostvars['cheburara-2']['ansible_default_ipv4']['address'] }}
-search {{ startup_name }}
-
 nameserver 8.8.8.8
 nameserver 8.8.4.4
+search {{ startup_name }}

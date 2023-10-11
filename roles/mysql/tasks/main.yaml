@@ -15,7 +15,6 @@
     apt:
       name: python3-pymysql
       state: present
-    become: yes
 
   - name: Create override.cnf file
     template:
@@ -30,7 +29,7 @@
     community.mysql.mysql_db:
       name: "{{ mysql_database }}"
       login_unix_socket: /var/run/mysqld/mysqld.sock
-    become: yes
+
   
   - name: MySQL user
     community.mysql.mysql_user:

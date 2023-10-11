@@ -2,11 +2,10 @@
   apt:
     name: bind9
     state: present
-  become: yes
 
-- name: Create override.named.conf.options file
+- name: Create configuration bind9 file
   template:
-    src: bind_override.cnf.j2
+    src: named.conf.options.j2
     dest: /etc/bind/named.conf.options
   notify: Restart bind9
 
@@ -14,14 +13,13 @@
   template:
     src: dns_zone.j2
     dest: "/var/lib/bind/db.{{ startup_name }}"
-  become: yes
 
-- name: Disable systemd-resolved service
-  systemd:
-    name: systemd-resolved
-    enabled: no
-    state: stopped
-  become: yes
+- name: Ensure bind9 service is started and enabled
+  service:
+    name: bind9
+    state: started
+    enabled: yes
+
 
 
 

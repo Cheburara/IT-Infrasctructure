@@ -1,4 +1,5 @@
 options {
+    directory "/var/cache/bind";
 
     forwarders {
         {% for forwarder in dns_forwarders %}
@@ -11,12 +12,11 @@ options {
         {{ network }};
         {% endfor %}
     };
-
 };
 
 zone "{{ startup_name }}" {
     type master;
-    file "/var/lib/bind/db.{{ startup_name }}. "; 
+    file "/var/lib/bind/db.{{ startup_name }}"; 
 };
 
 statistics-channels {
