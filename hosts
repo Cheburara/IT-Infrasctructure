@@ -7,6 +7,9 @@ cheburara-2
 [dns_servers]
 cheburara-2
 
+[prometheus_servers]
+cheburara-2
+
 [web_servers]
 cheburara-1
 

@@ -1,0 +1,31 @@
+- name: Install Prometheus
+  ansible.builtin.apt:
+    name: prometheus
+    state: present
+  tags:
+    - prometheus
+
+- name: Create Prometheus Configuration Directory
+  ansible.builtin.file:
+    path: /etc/prometheus
+    state: directory
+
+- name: Configure Prometheus
+  template:
+    src: prometheus.yml.j2
+    dest: /etc/prometheus/prometheus.yml
+  notify:
+    - Restart Prometheus
+
+- name: Configure Prometheus
+  template:
+    src: prometheus.default.j2
+    dest: /etc/default/prometheus
+  notify:
+    - Restart Prometheus
+
+- name: Start and Enable Prometheus Service
+  systemd:
+    name: prometheus
+    enabled: yes
+    state: started

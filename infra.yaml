@@ -21,6 +21,14 @@
     hosts: all
     roles:
       - resolver
+
+  - name: Prometheus
+    hosts: prometheus_servers
+    roles:
+      - nginx
+      - prometheus
+    tags:
+    - prometheus
   
   - name: Web Server
     hosts: web_servers
