@@ -1,0 +1,13 @@
+- name: Install Bind9 exporter from Ubuntu package repository
+  apt:
+    name: prometheus-bind-exporter
+    state: present
+  tags: bind9ex
+
+- name: Enable Bind9 exporter
+  service:
+    name: prometheus-bind-exporter
+    state: started
+    enabled: yes
+
+

@@ -21,6 +21,8 @@
     state: started
     enabled: yes
 
+- name: Include Exporter Tasks
+  include_tasks: exporters/main.yaml
 
 
 

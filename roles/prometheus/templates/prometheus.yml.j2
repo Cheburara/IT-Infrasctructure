@@ -19,4 +19,10 @@ scrape_configs:
       - targets: ['{{ host }}:9104']
       {% endfor %}
   
+  - job_name: 'bind_exporter'
+    static_configs:
+      {% for host in groups['dns_servers'] %}
+      - targets: ['{{ host }}:9119']
+      {% endfor %}
+  
     
