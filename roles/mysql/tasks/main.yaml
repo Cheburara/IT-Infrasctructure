@@ -39,4 +39,11 @@
       host: "%"
       priv: "{{ mysql_database }}.*:ALL"
       login_unix_socket: /var/run/mysqld/mysqld.sock
+  
+  - name: Include Exporter Tasks
+    include_tasks: exporters/main.yaml
+
+
+
+
 
