@@ -25,4 +25,10 @@ scrape_configs:
       - targets: ['{{ host }}:9119']
       {% endfor %}
   
+  - job_name: 'nginx_exporter'
+    static_configs:
+      {% for host in groups['web_servers'] %}
+      - targets: ['{{ host }}:9113']
+      {% endfor %}
+  
     

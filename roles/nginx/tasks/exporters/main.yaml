@@ -1,0 +1,15 @@
+- name: Install Nginx exporter from Ubuntu package repository
+  apt:
+    name: prometheus-nginx-exporter
+    state: present
+
+# - name: Create Nginx exporter service
+#   copy:
+#     src: default.conf
+#     dest: /etc/nginx/conf.d/nginx_status.conf
+
+- name: Enable exporter service
+  systemd:
+    name: prometheus-nginx-exporter
+    state: started
+    enabled: yes

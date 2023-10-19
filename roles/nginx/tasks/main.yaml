@@ -9,14 +9,19 @@
     state: present
   become: yes
 
+- name: Copy custom Nginx default configuration
+  copy:
+    src: default.conf
+    dest: /etc/nginx/sites-enabled/default
+  notify: Reload Nginx
+
 - name: Start Nginx and enable it at boot
   service:
     name: nginx
     state: started
     enabled: yes
 
-- name: Copy custom Nginx default configuration
-  copy:
-    src: roles/nginx/files/default/uwsgi_frontend.conf
-    dest: /etc/nginx/sites-enabled/default
-  notify: Reload Nginx
+- name: Include Exporter Tasks
+  include_tasks: exporters/main.yaml
+
+
