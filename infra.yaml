@@ -30,6 +30,12 @@
     tags:
     - prometheus
   
+  - name: Grafana
+    hosts: grafana_servers
+    roles:
+      - grafana
+    tags: grafana
+  
   - name: Web Server
     hosts: web_servers
     roles:

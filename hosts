@@ -1,5 +1,5 @@
-cheburara-1 ansible_host=193.40.156.67 ansible_port=17922 ansible_user=ubuntu
-cheburara-2 ansible_host=193.40.156.67 ansible_port=3222 ansible_user=ubuntu
+cheburara-1 ansible_host=193.40.156.67 ansible_port=6322 ansible_user=ubuntu
+cheburara-2 ansible_host=193.40.156.67 ansible_port=8522 ansible_user=ubuntu
 
 [db_servers]
 cheburara-2
@@ -8,6 +8,9 @@ cheburara-2
 cheburara-2
 
 [prometheus_servers]
+cheburara-2
+
+[grafana_servers]
 cheburara-2
 
 [web_servers]
