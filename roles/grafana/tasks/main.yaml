@@ -29,3 +29,23 @@
     name: grafana-server
     state: started
     enabled: yes
+
+- name: Copy Prometheus data source configuration
+  copy:
+    src: datasource.yaml  
+    dest: /etc/grafana/provisioning/datasources/prometheus.yaml
+
+- name: Copy json configuration
+  copy:
+    src: dashboard-source.yaml
+    dest: /etc/grafana/provisioning/dashboards/dashboard-source.yaml
+
+- name: Copy json dashboard
+  copy:
+    src: main.json
+    dest: /var/lib/grafana
+
+- name: Restart Grafana service
+  systemd:
+    name: grafana-server
+    state: restarted
