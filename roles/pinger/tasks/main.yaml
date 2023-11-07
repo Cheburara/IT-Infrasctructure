@@ -1,0 +1,46 @@
+---
+    - name: Install fping
+      apt:
+        name: fping
+        state: latest
+    
+    - name: Install curl
+      apt:
+        name: curl
+        state: latest
+    
+    - name: Add the user "pinger"
+      user:
+        name: pinger
+
+    - name: Copy pinger.sh to /usr/local/bin/pinger
+      copy:
+        src: pinger.sh
+        dest: /usr/local/bin/pinger
+        mode: 0755
+
+    - name: Create the /etc/pinger directory
+      file:
+        path: /etc/pinger
+        state: directory
+
+    - name: Copy pinger.conf to /etc/pinger/pinger.conf
+      copy:
+        src: pinger.conf
+        dest: /etc/pinger/pinger.conf
+
+    - name: Copy the pinger.service unit file
+      template:
+        src: pinger.service.j2
+        dest: /etc/systemd/system/pinger.service
+      notify: Reload systemd
+    
+    - name: Unmask the pinger service
+      command: systemctl unmask pinger.service
+
+    - name: Start and enable the pinger service
+      systemd:
+        name: pinger
+        enabled: yes
+        state: started
+      notify: Restart pinger

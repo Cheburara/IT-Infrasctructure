@@ -30,5 +30,11 @@ scrape_configs:
       {% for host in groups['web_servers'] %}
       - targets: ['{{ host }}:9113']
       {% endfor %}
+
+  - job_name: 'influxdb-stats-exporter'
+    static_configs:
+      {% for host in groups['influxDB_servers'] %}
+      - targets: ['{{ host }}:9424']
+      {% endfor %}
   
     

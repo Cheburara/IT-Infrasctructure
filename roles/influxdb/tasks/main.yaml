@@ -1,0 +1,61 @@
+---
+  - name: Add InfluxData GPG key
+    apt_key:
+      url: https://repos.influxdata.com/influxdata-archive_compat.key
+      state: present
+
+  - name: Download InfluxDB 1.8.10 package
+    get_url:
+      url: https://dl.influxdata.com/influxdb/releases/influxdb_1.8.10_amd64.deb
+      dest: /tmp/influxdb_1.8.10_amd64.deb
+
+  - name: Install InfluxDB
+    apt:
+      deb: /tmp/influxdb_1.8.10_amd64.deb
+      state: present
+
+  - name: Update package repositories and upgrade packages
+    apt:
+      update_cache: yes
+  
+  - name: Copy InfluxDB configuration file
+    template: 
+      src: influxdb.conf.j2
+      dest: /etc/influxdb/influx_logging.conf
+    notify: Restart InfluxDb service
+
+  - name: Start InfluxDB service
+    service:
+      name: influxdb
+      state: started
+      enabled: yes
+  
+##################################TELEGRAF#########################################
+
+  - name: Download Telegraf package
+    get_url:
+      url: https://dl.influxdata.com/telegraf/releases/telegraf_1.16.0-1_amd64.deb
+      dest: /opt/telegraf_1.16.0-1_amd64.deb
+
+  - name: Install Telegraf
+    apt:
+      deb: /opt/telegraf_1.16.0-1_amd64.deb
+
+  - name: Reconfigure Telegraf
+    template:
+      src: telegraf.conf.j2
+      dest: /etc/telegraf/telegraf.conf
+    notify: restart telegraf
+
+  - name: Start service telegraf
+    service:
+      name: telegraf
+      state: started
+      enabled: yes
+  
+  - name: Include Exporter Tasks
+    include_tasks: exporters/main.yaml
+
+
+
+

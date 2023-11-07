@@ -8,6 +8,20 @@ datasources:
     url: http://cheburara-2:9090/prometheus/
     isDefault: true
 
+  - name: influxdb:influxdb_cheburara
+    type: influxdb
+    orID: 1
+    access: proxy
+    url: http://cheburara-2:8086
+    database: influxdb_cheburara
+    isDefault: False 
+
+  - name: influxdb:telegarf
+    type: influxdb
+    access: proxy
+    url: http://cheburara-2:8086
+    database: telegraf
+  
 
 
 

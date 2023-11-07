@@ -41,3 +41,23 @@
   ansible.builtin.apt:
     name: ca-certificates=20230311ubuntu0.20.04.1
     state: present
+
+#######RSYSLOG########
+
+- name: Install rsyslog
+  apt:
+    name: rsyslog
+    state: present
+
+- name: Create a custom rsyslog configuration file
+  copy:
+    content: |
+      *.* @127.0.0.1:6514;RSYSLOG_SyslogProtocol23Format
+      $ActionQueueType LinkedList 
+      $ActionQueueFileName srvrfwd 
+      $ActionResumeRetryCount -1 
+      $ActionQueueSaveOnShutdown on
+    dest: /etc/rsyslog.d/99-telegraf.conf
+  notify: Restart rsyslog
+
+
