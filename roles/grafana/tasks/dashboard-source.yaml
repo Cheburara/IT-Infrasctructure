@@ -13,5 +13,5 @@ providers:
     type: file
     disableDeletion: false
     options:
-      path: /var/lib/grafana/syslog-dashboards
+      path: /var/lib/grafana
       

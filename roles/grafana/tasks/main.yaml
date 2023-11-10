@@ -48,7 +48,7 @@
 - name: Copy syslog json dashboard
   copy:
     src: syslog.json
-    dest: /var/lib/grafana/syslog-dashboards
+    dest: /var/lib/grafana
 
 - name: Restart Grafana service
   systemd:
