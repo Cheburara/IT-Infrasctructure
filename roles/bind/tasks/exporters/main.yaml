@@ -9,5 +9,6 @@
     name: prometheus-bind-exporter
     state: started
     enabled: yes
+  notify: Restart bind9
 
 

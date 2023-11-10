@@ -27,8 +27,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "type": "prometheus"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -67,8 +66,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "type": "prometheus"
           },
           "expr": "(node_memory_MemTotal_bytes - node_memory_MemFree_bytes) / node_memory_MemTotal_bytes * 100",
           "refId": "A"
@@ -90,13 +88,9 @@
       },
       "yaxes": [
         {
-          "format": "short",
-          "logBase": 1,
           "show": true
         },
         {
-          "format": "short",
-          "logBase": 1,
           "show": true
         }
       ],
@@ -110,8 +104,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "type": "prometheus"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -150,8 +143,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "type": "prometheus"
           },
           "expr": "node_load1",
           "refId": "A"
@@ -173,13 +165,9 @@
       },
       "yaxes": [
         {
-          "format": "short",
-          "logBase": 1,
           "show": true
         },
         {
-          "format": "short",
-          "logBase": 1,
           "show": true
         }
       ],
@@ -193,8 +181,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "type": "prometheus"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -233,8 +220,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "type": "prometheus"
           },
           "expr": "rate(bind_resolver_queries_total{type=\"A\"}[1m])",
           "refId": "A"
@@ -256,13 +242,9 @@
       },
       "yaxes": [
         {
-          "format": "short",
-          "logBase": 1,
           "show": true
         },
         {
-          "format": "short",
-          "logBase": 1,
           "show": true
         }
       ],
@@ -276,8 +258,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "type": "prometheus"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -316,8 +297,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "type": "prometheus"
           },
           "expr": "rate(mysql_global_status_commands_total{command='select'}[1m])",
           "refId": "A"
@@ -339,13 +319,9 @@
       },
       "yaxes": [
         {
-          "format": "short",
-          "logBase": 1,
           "show": true
         },
         {
-          "format": "short",
-          "logBase": 1,
           "show": true
         }
       ],
@@ -359,8 +335,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "type": "prometheus"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -399,8 +374,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "type": "prometheus"
           },
           "expr": "rate(nginx_http_requests_total[1m])",
           "refId": "A"
@@ -422,13 +396,9 @@
       },
       "yaxes": [
         {
-          "format": "short",
-          "logBase": 1,
           "show": true
         },
         {
-          "format": "short",
-          "logBase": 1,
           "show": true
         }
       ],
@@ -481,32 +451,16 @@
       "steppedLine": false,
       "targets": [
         {
-          "datasource": "telegraf",
-          "expr": "SELECT COUNT(*) FROM rtt WHERE time > now() - 1h",
-          "format": "time_series",
-          "interval": "1s",
-          "legendFormat": "",
-          "refId": "A",
-          "step": 10
-        },
-        {
           "datasource": {
             "type": "influxdb",
             "uid": "P3168EDBD1FFBB4A6"
           },
-          "expr": "SELECT COUNT(*) FROM rtt WHERE time > now() - 1h",
           "groupBy": [
             {
               "params": [
                 "$__interval"
               ],
               "type": "time"
-            },
-            {
-              "params": [
-                "dst::tag"
-              ],
-              "type": "tag"
             },
             {
               "params": [
@@ -534,7 +488,13 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "dst::tag",
+              "operator": "=",
+              "value": "youtube.com"
+            }
+          ]
         }
       ],
       "thresholds": [],
@@ -553,13 +513,9 @@
       },
       "yaxes": [
         {
-          "format": "short",
-          "logBase": 1,
           "show": true
         },
         {
-          "format": "short",
-          "logBase": 1,
           "show": true
         }
       ],
@@ -649,7 +605,13 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "dst::tag",
+              "operator": "=",
+              "value": "youtube.com"
+            }
+          ]
         }
       ],
       "thresholds": [],
@@ -668,13 +630,9 @@
       },
       "yaxes": [
         {
-          "format": "short",
-          "logBase": 1,
           "show": true
         },
         {
-          "format": "short",
-          "logBase": 1,
           "show": true
         }
       ],
@@ -764,7 +722,13 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "dst::tag",
+              "operator": "=",
+              "value": "youtube.com"
+            }
+          ]
         }
       ],
       "thresholds": [],
@@ -783,13 +747,9 @@
       },
       "yaxes": [
         {
-          "format": "short",
-          "logBase": 1,
           "show": true
         },
         {
-          "format": "short",
-          "logBase": 1,
           "show": true
         }
       ],
@@ -798,20 +758,20 @@
       }
     }
   ],
-  "refresh": false,
+  "refresh": "",
   "schemaVersion": 38,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "2023-11-07T14:59:25.673Z",
-    "to": "2023-11-07T17:59:25.673Z"
+    "from": "now-6h",
+    "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Main",
   "uid": "d7de75eb-d7a1-4e2b-8b3b-6cc492d23dc6",
-  "version": 2,
+  "version": 7,
   "weekStart": ""
 }

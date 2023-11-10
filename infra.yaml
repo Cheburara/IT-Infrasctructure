@@ -39,7 +39,7 @@
   - name: InfluxDB
     hosts: influxDB_servers
     roles:
-      - influxdb
+      - influxdbhttp://193.40.156.67:5480/
     tags: influxdb
 
   - name: Pinger

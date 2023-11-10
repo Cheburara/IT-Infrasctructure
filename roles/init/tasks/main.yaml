@@ -25,6 +25,8 @@
 - name: Update APT cache
   ansible.builtin.apt:
     cache_valid_time: 86400
+    
+########PROMETHEUS-EXPORTER##########
 
 - name: Install Prometheus Node Exporter
   ansible.builtin.apt:
@@ -50,14 +52,31 @@
     state: present
 
 - name: Create a custom rsyslog configuration file
-  copy:
-    content: |
-      *.* @127.0.0.1:6514;RSYSLOG_SyslogProtocol23Format
-      $ActionQueueType LinkedList 
-      $ActionQueueFileName srvrfwd 
-      $ActionResumeRetryCount -1 
-      $ActionQueueSaveOnShutdown on
+  template:
+    src: rsyslog.conf.j2
     dest: /etc/rsyslog.d/99-telegraf.conf
   notify: Restart rsyslog
+
+- name: Modify a custom rsyslog configuration file
+  template:
+    src: rsyslog.confadvanced.j2
+    dest: /etc/rsyslog.d/99-telegraf.conf
+  notify: Restart rsyslog
+
+#########BACKUP############
+
+- name: Ensure the user 'backup' exists with a unique SSH key
+  user:
+    name: backup
+    home: /home/backup
+    shell: /bin/bash
+    generate_ssh_key: yes
+    ssh_key_file: "/home/backup/.ssh/id_rsa"
+
+- name: Create known_hosts file for user backup
+  template:
+    src: known_hosts.j2
+    dest: /home/backup/.ssh/known_hosts
+  become: yes
 
 

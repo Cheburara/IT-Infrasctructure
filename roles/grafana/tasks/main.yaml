@@ -40,12 +40,18 @@
     src: dashboard-source.yaml
     dest: /etc/grafana/provisioning/dashboards/dashboard-source.yaml
 
-- name: Copy json dashboard
+- name: Copy main json dashboard
   copy:
     src: main.json
     dest: /var/lib/grafana
+
+- name: Copy syslog json dashboard
+  copy:
+    src: syslog.json
+    dest: /var/lib/grafana/syslog-dashboards
 
 - name: Restart Grafana service
   systemd:
     name: grafana-server
     state: restarted
+

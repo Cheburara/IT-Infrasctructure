@@ -18,9 +18,12 @@ datasources:
 
   - name: influxdb:telegarf
     type: influxdb
+    orID: 1
     access: proxy
     url: http://cheburara-2:8086
     database: telegraf
+    isDefault: False 
+    
   
 
 
