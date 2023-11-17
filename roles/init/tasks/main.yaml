@@ -79,4 +79,18 @@
     dest: /home/backup/.ssh/known_hosts
   become: yes
 
+########BACKUP-CONFIG########
+
+- name: Ensure /home/backup/restore directory exists
+  file:
+    path: /home/backup/restore
+    state: directory
+    owner: backup
+    group: backup
+    
+- name: Ensure Duplicity is installed
+  apt:
+    name: duplicity
+    state: present
+
 

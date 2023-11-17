@@ -13,3 +13,4 @@
     name: prometheus-nginx-exporter
     state: started
     enabled: yes
+  notify: Reload Nginx

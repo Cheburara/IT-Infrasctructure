@@ -56,6 +56,24 @@
   - name: Include Exporter Tasks
     include_tasks: exporters/main.yaml
 
+#######BACKUP############
+
+  - name: Ensure /home/backup/influxdb directory exists
+    file:
+      path: /home/backup/influxdb
+      state: directory
+      owner: backup
+      group: backup
+      mode: '0755'
+  
+  - name: Create Cron tab file for InfluxDB backup
+    template:
+      src: influxdb_backup_cron.j2  
+      dest: /etc/cron.d/influxdb-backup
+      mode: '0644'
+    notify: Restart InfluxDb service
+    tags: sos
+
 
 
 

@@ -1,0 +1,2 @@
+0 16 * * *  backup mysqldump agama > /home/backup/mysql/agama.sql && duplicity --no-encryption full /home/backup/mysql/ rsync://Cheburara@backup.{{ startup_name }}/mysql
+0 16 * * 1-6  backup mysqldump agama > /home/backup/mysql/agama.sql && duplicity --no-encryption incremental /home/backup/mysql/ rsync://Cheburara@backup.{{ startup_name }}/mysql
