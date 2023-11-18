@@ -50,6 +50,11 @@
     src: syslog.json
     dest: /var/lib/grafana
 
+- name: Copy MySQL json dashboard
+  copy:
+    src: mysql.json
+    dest: /var/lib/grafana
+
 - name: Restart Grafana service
   systemd:
     name: grafana-server

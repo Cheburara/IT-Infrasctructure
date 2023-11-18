@@ -14,4 +14,11 @@ providers:
     disableDeletion: false
     options:
       path: /var/lib/grafana
+  
+  - name: 'MySQL Dashboard'
+    orgID: 1
+    type: file
+    disableDeletion: false
+    options:
+      path: /var/lib/grafana
       

@@ -3,7 +3,7 @@
     hosts: all
     roles:
       - init
-    tags: always
+    # tags: always
   
   - name: Database server
     hosts: db_servers

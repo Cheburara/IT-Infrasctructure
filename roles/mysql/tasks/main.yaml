@@ -80,6 +80,26 @@
       mode: '0644'
     notify: Restart Mysql
 
+########REPLICATION#######
+
+  - name: Create MySQL user 'replication' with privileges
+    mysql_user:
+      name: "{{ mysql_replication_user }}"
+      password: "{{ mysql_replication_pass }}"
+      priv: "*.*:REPLICATION SLAVE"
+      host: "%"
+      login_unix_socket: /var/run/mysqld/mysqld.sock
+      state: present
+  
+  - name: MySQL read only mode configuration
+    mysql_variables:
+      variable: read_only
+      value: "{{ 'OFF' if inventory_hostname == mysql_host else 'ON' }}"
+      mode: persist
+      login_unix_socket: /var/run/mysqld/mysqld.sock
+    notify:
+    - Restart mysql source
+    - Restart mysql replica
 
 
 

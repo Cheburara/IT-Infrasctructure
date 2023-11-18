@@ -1,4 +1,4 @@
-mysql_host: cheburara-2
+mysql_host: "{{ groups['db_servers'] | first }}"
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -27,6 +27,18 @@ mysql_backup_pass: !vault |
           3039333063333564360a333230383365363461636437646466663031353863666332303366613931
           6338
 
+mysql_backup_host: "{{ groups['db_servers'] | reject('eq', mysql_host) | first | default(mysql_host) }}"
+
+mysql_replication_user: replication
+mysql_replication_pass: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          37303834616138613639333765333637366338393664333632396534633363653164396232303663
+          6165663666363132616438653437303534613532386132340a393864326438353865306139643633
+          36636262656431393862333531633266353739346337376661663932326363643962323066356165
+          3861366134376137650a323238633038616161393161303934656363633966613361623430336165
+          3362
+
+node_id: "{{ (ansible_port / 100) | int }}"
 
 grafana_user: cheba
 grafana_password: !vault |

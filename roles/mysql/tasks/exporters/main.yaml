@@ -18,6 +18,13 @@
     src: my.cnf.j2
     dest: /var/lib/prometheus/.my.cnf
 
+- name: Update Prometheus MySQL Exporter for Replication Metrics
+  lineinfile:
+    path: /etc/default/prometheus-mysqld-exporter
+    line: 'ARGS="--collect.slave_status"'
+  notify:
+    - Restart Prometheus MySQL Exporter
+
 - name: Ensure Exporter Restarts 
   systemd:
     name: prometheus-mysqld-exporter
