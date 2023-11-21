@@ -11,7 +11,11 @@ options {
         {% for network in allowed_networks %}
         {{ network }};
         {% endfor %}
+        grafana_network;
     };
+
+    recursion yes;  // Enable recursive queries
+    allow-recursion { grafana_network; }; 
 };
 
 zone "{{ startup_name }}" {
@@ -22,3 +26,7 @@ zone "{{ startup_name }}" {
 statistics-channels {
     inet 127.0.0.1 port 8053; 
 }; 
+
+acl grafana_network {
+    172.17.0.0/16;
+};

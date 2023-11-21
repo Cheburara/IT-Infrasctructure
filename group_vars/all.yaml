@@ -49,6 +49,7 @@ grafana_password: !vault |
           3438353766373965350a653365326166356466313834376632303366353431383433343263633965
           3862
 
+grafana_port: 3001
 
 startup_name: chebariss.io
 

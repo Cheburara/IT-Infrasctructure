@@ -3,7 +3,7 @@
     hosts: all
     roles:
       - init
-    # tags: always
+    tags: always
   
   - name: Database server
     hosts: db_servers
@@ -33,7 +33,9 @@
   - name: Grafana
     hosts: grafana_servers
     roles:
+      - docker
       - grafana
+      - nginx
     tags: grafana
   
   - name: InfluxDB

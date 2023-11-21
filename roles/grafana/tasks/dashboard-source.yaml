@@ -6,19 +6,19 @@ providers:
     type: file
     disableDeletion: false
     options:
-      path: /var/lib/grafana
+      path: /etc/grafana/provisioning/dashboards
 
   - name: 'Syslog Dashboard'
     orgID: 1
     type: file
     disableDeletion: false
     options:
-      path: /var/lib/grafana
+      path: /etc/grafana/provisioning/dashboards
   
   - name: 'MySQL Dashboard'
     orgID: 1
     type: file
     disableDeletion: false
     options:
-      path: /var/lib/grafana
+      path: /etc/grafana/provisioning/dashboards
       

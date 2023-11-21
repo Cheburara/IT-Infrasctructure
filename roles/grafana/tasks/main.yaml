@@ -1,62 +1,66 @@
-- name: Import Grafana APT GPG key
-  apt_key:
-    url: https://packages.grafana.com/gpg.key
-    state: present
-
-- name: Add Grafana APT repository
-  apt_repository:
-    repo: "deb https://apt.grafana.com stable main"
-    state: present
-    filename: grafana
-
-- name: Install Grafana OSS
-  apt:
-    name: grafana
-    state: present
-
-- name: Update package repositories and upgrade packages
-  apt:
-    update_cache: yes
+- name: Create Grafana directory
+  file:
+    name: /opt/grafana
+    state: directory
 
 - name: Grafana configuration
   template:
     src: grafana.ini.j2
-    dest: /etc/grafana/grafana.ini 
-  notify: Restart grafana
+    dest: /opt/grafana/grafana.ini
+  no_log: true
+  notify: Restart Grafana Container
 
-- name: Start and enable Grafana service
-  systemd:
-    name: grafana-server
-    state: started
-    enabled: yes
+- name: Install Grafana in Docker container
+  docker_container:
+    name: grafana
+    image: grafana/grafana
+    published_ports: "{{ grafana_port }}:3000"
+    volumes: 
+      - /opt/grafana:/etc/grafana
 
+- name: Create Grafana directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - "/opt/grafana/provisioning/dashboards"
+    - "/opt/grafana/provisioning/datasources"
+  
 - name: Copy Prometheus data source configuration
   copy:
     src: datasource.yaml  
-    dest: /etc/grafana/provisioning/datasources/prometheus.yaml
+    dest: /opt/grafana/provisioning/datasources/prometheus.yaml
 
 - name: Copy json configuration
   copy:
     src: dashboard-source.yaml
-    dest: /etc/grafana/provisioning/dashboards/dashboard-source.yaml
-
-- name: Copy main json dashboard
+    dest: /opt/grafana/provisioning/dashboards/dashboard-source.yaml
+  
+- name: Copy main.json to Docker host
   copy:
     src: main.json
-    dest: /var/lib/grafana
+    dest: /opt/grafana/provisioning/dashboards
 
 - name: Copy syslog json dashboard
   copy:
     src: syslog.json
-    dest: /var/lib/grafana
+    dest: /opt/grafana/provisioning/dashboards
 
 - name: Copy MySQL json dashboard
   copy:
     src: mysql.json
-    dest: /var/lib/grafana
+    dest: /opt/grafana/provisioning/dashboards
 
-- name: Restart Grafana service
-  systemd:
-    name: grafana-server
-    state: restarted
+- name: Create Grafana provisioning files
+  file:
+    path: "{{ item }}"
+    state: touch
+  loop:
+    - "/opt/grafana/grafana.ini"
+    - "/opt/grafana/provisioning/dashboards/dashboard-source.yaml"
+    - "/opt/grafana/provisioning/datasources/datasource.yaml"
+    - "/opt/grafana/provisioning/dashboards/main.json"
+    - "/opt/grafana/provisioning/dashboards/mysql.json"
+    - "/opt/grafana/provisioning/dashboards/syslog.json"
+  notify: Restart Grafana Container
 

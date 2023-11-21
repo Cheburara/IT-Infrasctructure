@@ -1,0 +1,62 @@
+- name: Import Grafana APT GPG key
+  apt_key:
+    url: https://packages.grafana.com/gpg.key
+    state: present
+
+- name: Add Grafana APT repository
+  apt_repository:
+    repo: "deb https://apt.grafana.com stable main"
+    state: present
+    filename: grafana
+
+- name: Install Grafana OSS
+  apt:
+    name: grafana
+    state: present
+
+- name: Update package repositories and upgrade packages
+  apt:
+    update_cache: yes
+
+- name: Grafana configuration
+  template:
+    src: grafana.ini.j2
+    dest: /etc/grafana/grafana.ini 
+  notify: Restart grafana
+
+- name: Start and enable Grafana service
+  systemd:
+    name: grafana-server
+    state: started
+    enabled: yes
+
+- name: Copy Prometheus data source configuration
+  copy:
+    src: datasource.yaml  
+    dest: /etc/grafana/provisioning/datasources/prometheus.yaml
+
+- name: Copy json configuration
+  copy:
+    src: dashboard-source.yaml
+    dest: /etc/grafana/provisioning/dashboards/dashboard-source.yaml
+
+- name: Copy main json dashboard
+  copy:
+    src: main.json
+    dest: /var/lib/grafana
+
+- name: Copy syslog json dashboard
+  copy:
+    src: syslog.json
+    dest: /var/lib/grafana
+
+- name: Copy MySQL json dashboard
+  copy:
+    src: mysql.json
+    dest: /var/lib/grafana
+
+- name: Restart Grafana service
+  systemd:
+    name: grafana-server
+    state: restarted
+
