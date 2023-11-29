@@ -9,8 +9,8 @@
 #     dest: /etc/nginx/conf.d/nginx_status.conf
 
 - name: Enable exporter service
-  systemd:
+  service:
     name: prometheus-nginx-exporter
     state: started
     enabled: yes
-  notify: Reload Nginx
+  notify: Restart Nginx exporter

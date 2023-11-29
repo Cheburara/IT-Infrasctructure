@@ -1,5 +1,11 @@
 - name: Reload Nginx
-  systemd:
+  service:
     name: nginx
+    state: restarted
+  become: yes
+
+- name: Restart Nginx exporter
+  service:
+    name: prometheus-nginx-exporter
     state: restarted
   become: yes
