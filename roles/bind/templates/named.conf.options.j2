@@ -1,3 +1,8 @@
+key "transfer.key" {
+	algorithm hmac-sha256;
+	secret "{{ transfer_key }}";
+};
+
 options {
     directory "/var/cache/bind";
 
@@ -12,12 +17,9 @@ options {
         {{ network }};
         {% endfor %}
     };
+
 };
 
-zone "{{ startup_name }}" {
-    type master;
-    file "/var/lib/bind/db.{{ startup_name }}"; 
-};
 
 statistics-channels {
     inet 127.0.0.1 port 8053; 

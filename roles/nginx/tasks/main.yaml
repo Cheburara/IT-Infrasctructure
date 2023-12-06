@@ -19,7 +19,7 @@
     name: nginx
     state: started
     enabled: yes
-  notify: Reload Nginx
+  notify: Restart Nginx
 
 - name: Include Exporter Tasks
   include_tasks: exporters/main.yaml

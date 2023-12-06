@@ -6,8 +6,15 @@ cheburara-2 ansible_host=193.40.156.67 ansible_port=33722 ansible_user=ubuntu
 cheburara-1
 cheburara-2
 
-[dns_servers]
+[dns_master]
+cheburara-1
+
+[dns_slave]
 cheburara-2
+
+[dns_servers:children]
+dns_master
+dns_slave
 
 [prometheus_servers]
 cheburara-2

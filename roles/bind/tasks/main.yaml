@@ -10,10 +10,17 @@
     dest: /etc/bind/named.conf.options
   notify: Restart bind9
 
+- name: Create configuration bind9 for master and slave
+  template:
+    src: named.conf.local.j2
+    dest: /etc/bind/named.conf.local
+  notify: Restart bind9
+
 - name: Create DNS Zone File
   template:
     src: dns_zone.j2
-    dest: "/var/lib/bind/db.{{ startup_name }}"
+    dest: "/var/cache/bind/db.{{ startup_name }}"
+  # when: inventory_hostname in groups ['dns_master']
 
 - name: Ensure bind9 service is started and enabled
   service:
