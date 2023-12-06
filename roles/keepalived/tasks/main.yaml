@@ -1,0 +1,71 @@
+---
+  - name: Installation of Keepalived
+    apt:
+      name: keepalived
+
+  - name: Create keepalived_script user
+    user:
+      name: keepalived_script
+      state: present
+  
+  - name: Create home directory for keepalived_script user
+    file:
+      path: /home/keepalived_script
+      state: directory
+      owner: keepalived_script
+      group: keepalived_script
+      mode: 0755
+  
+  - name: Create configuration for keepalived_script
+    template: 
+      src: check_script.j2
+      dest: /home/keepalived_script/check_script
+      owner: keepalived_script
+      group: keepalived_script
+      mode: 0755
+
+  - name: Keepalived configuration  
+    template:
+      src: keepalived.conf.j2  
+      dest: /etc/keepalived/keepalived.conf 
+    notify: restart keepalived
+  
+  - name: Enable keepalived
+    service: 
+      name: keepalived
+      state: started
+      enabled: yes
+
+###########EXPORTERS############
+
+  - name: Ensure /usr/local/bin directory exists
+    ansible.builtin.file:
+      path: /usr/local/bin
+      state: directory
+
+  - name: Download Keepalived Exporter Binary
+    ansible.builtin.get_url:
+      url: "https://github.com/mehdy/keepalived-exporter/releases/download/v1.3.2/keepalived-exporter-1.3.2.linux-amd64.tar.gz"
+      dest: "/tmp/keepalived-exporter.tar.gz"
+      mode: '0755'
+
+  - name: Extract and Install Keepalived Exporter Binary
+    ansible.builtin.unarchive:
+      src: "/tmp/keepalived-exporter.tar.gz"
+      dest: "/usr/local/bin/"
+      remote_src: yes
+      creates: "/usr/local/bin/keepalived-exporter-1.3.2.linux-amd64" 
+  
+  - name: Configuration of Keepalived Exporter
+    template:
+      src: keepalived_exporters.j2
+      dest: /etc/systemd/system/keepalived-exporter.service
+    notify: Restart Keepalived Exporter
+
+  - name: Start and Enable Keepalived Exporter
+    systemd:
+      name: keepalived-exporter
+      state: started
+      enabled: yes
+
+

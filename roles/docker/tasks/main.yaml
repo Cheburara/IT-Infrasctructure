@@ -10,3 +10,4 @@
     name: docker
     state: started
     enabled: yes
+  notify: Restart Docker service

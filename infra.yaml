@@ -3,24 +3,24 @@
     hosts: all
     roles:
       - init
-    tags: always
-  
-  - name: Database server
-    hosts: db_servers
-    roles:
-      - mysql
-    tags: mysql
+    # tags: always
 
   - name: DNS server
     hosts: dns_servers
     roles:
       - bind
-    tags: bind9
+    tags: b
 
   - name: Resolver
     hosts: all
     roles:
       - resolver
+  
+  - name: Database server
+    hosts: db_servers
+    roles:
+      - mysql
+    tags: db
 
   - name: Prometheus
     hosts: prometheus_servers
@@ -28,27 +28,33 @@
       - nginx
       - prometheus
     tags:
-    - prometheus
+    - p
   
   - name: Grafana
     hosts: grafana_servers
     roles:
       - docker
       - grafana
-      - nginx
-    tags: grafana
+    tags: gr
   
   - name: InfluxDB
     hosts: influxDB_servers
     roles:
       - influxdb 
-    tags: influxdb
+    tags: in
 
   - name: Pinger
     hosts: pinger_servers
     roles:
       - pinger
-    tags: pinger
+    tags: ping
+
+  - name: HAPoxy
+    hosts: haproxy_servers  
+    roles:
+      - haproxy
+      - keepalived
+    tags: hak
   
   - name: Web Server
     hosts: web_servers
@@ -58,4 +64,10 @@
       # - uwsgi
       - nginx
     tags: web
+
+  - name: Nginx
+    hosts: all
+    roles:
+      - nginx
+    tags: ng
 

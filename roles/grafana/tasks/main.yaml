@@ -26,41 +26,18 @@
     - "/opt/grafana/provisioning/dashboards"
     - "/opt/grafana/provisioning/datasources"
   
-- name: Copy Prometheus data source configuration
+- name: Copy dashboard configurations
   copy:
-    src: datasource.yaml  
-    dest: /opt/grafana/provisioning/datasources/prometheus.yaml
-
-- name: Copy json configuration
-  copy:
-    src: dashboard-source.yaml
-    dest: /opt/grafana/provisioning/dashboards/dashboard-source.yaml
-  
-- name: Copy main.json to Docker host
-  copy:
-    src: main.json
-    dest: /opt/grafana/provisioning/dashboards
-
-- name: Copy syslog json dashboard
-  copy:
-    src: syslog.json
-    dest: /opt/grafana/provisioning/dashboards
-
-- name: Copy MySQL json dashboard
-  copy:
-    src: mysql.json
-    dest: /opt/grafana/provisioning/dashboards
-
-- name: Create Grafana provisioning files
-  file:
-    path: "{{ item }}"
-    state: touch
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
   loop:
-    - "/opt/grafana/grafana.ini"
-    - "/opt/grafana/provisioning/dashboards/dashboard-source.yaml"
-    - "/opt/grafana/provisioning/datasources/datasource.yaml"
-    - "/opt/grafana/provisioning/dashboards/main.json"
-    - "/opt/grafana/provisioning/dashboards/mysql.json"
-    - "/opt/grafana/provisioning/dashboards/syslog.json"
+    - { src: 'dashboard-source.yaml', dest: '/opt/grafana/provisioning/dashboards/dashboard-source.yaml'}
+    - { src: 'datasource.yaml', dest: '/opt/grafana/provisioning/datasources/datasource.yaml'}
+    - { src: 'main.json', dest: '/opt/grafana/provisioning/dashboards/main.json' }
+    - { src: 'syslog.json', dest: '/opt/grafana/provisioning/dashboards/syslog.json' }
+    - { src: 'mysql.json', dest: '/opt/grafana/provisioning/dashboards/mysql.json' }
+    - { src: 'haproxy_keepalived.json', dest: '/opt/grafana/provisioning/dashboards/haproxy_keepalived.json' }
   notify: Restart Grafana Container
+
+
 

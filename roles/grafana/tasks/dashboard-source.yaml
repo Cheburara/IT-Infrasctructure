@@ -21,4 +21,14 @@ providers:
     disableDeletion: false
     options:
       path: /etc/grafana/provisioning/dashboards
+    
+  - name: 'HAProxy and Keepalived Dashboard'
+    orgID: 1
+    type: file
+    disableDeletion: false
+    options:
+      path: /etc/grafana/provisioning/dashboards
+
+      
+
       

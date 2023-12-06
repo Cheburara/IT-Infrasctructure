@@ -1,0 +1,30 @@
+---
+  - name: Installation HAProxy
+    apt:
+      name: haproxy
+  
+  - name: HAProxy Configuration
+    template:
+      src: haproxy.conf.j2
+      dest: /etc/haproxy/haproxy.cfg
+    notify: Restart HAProxy
+
+########EXPORTES#########
+
+  - name: HAProxy exporters
+    apt:
+      name: prometheus-haproxy-exporter
+      state: present
+  
+  - name: Configure prometheus-haproxy-exporter
+    lineinfile:
+      path: /etc/default/prometheus-haproxy-exporter
+      line: 'ARGS="--haproxy.scrape-uri=http://localhost:{{ haproxy_port }}/haproxy/stats;csv"'
+    notify: Restart prometheus-haproxy-exporter
+
+
+  
+
+
+    
+

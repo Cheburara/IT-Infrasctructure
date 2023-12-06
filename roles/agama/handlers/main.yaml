@@ -1,2 +1,5 @@
 - name: Restart Agama Container
-  command: docker restart agama
+  docker_container:
+    name: "agama{{ item }}"
+    state: restarted
+  loop: "{{ range(agama_count|int) | list }}"

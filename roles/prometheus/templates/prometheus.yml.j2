@@ -37,4 +37,21 @@ scrape_configs:
       - targets: ['{{ host }}:9424']
       {% endfor %}
   
+  - job_name: 'prometheus-haproxy-exporter'
+    static_configs:
+      {% for host in groups['haproxy_servers'] %}
+      - targets: ['{{ host }}:9101']
+      {% endfor %}
+    
+  
+  - job_name: 'keepalived-exporter'
+    static_configs:
+      {% for host in groups['haproxy_servers'] %}
+      - targets: ['{{ host }}:9165']
+      {% endfor %}
+  
+ 
+  
+  
+  
     
