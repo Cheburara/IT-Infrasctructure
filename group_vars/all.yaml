@@ -59,11 +59,10 @@ keepalived_pass: !vault |
           3965
 
 grafana_port: 3001
-
 haproxy_port: 88
 prometheus_exporter_port: 9188 
-
 agama_port: 8001
+
 agama_count: 2
 
 startup_name: chebariss.io
@@ -80,6 +79,7 @@ dns_forwarders:
 
 backup_server_ip: 192.168.42.132
 backup_server_ssh_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90"
+backup_server_ip_reversed: "{{ backup_server_ip.split('.')[3] + '.' + backup_server_ip.split('.')[2] }}"
 
 transfer_key: !vault |
           $ANSIBLE_VAULT;1.1;AES256
@@ -90,6 +90,38 @@ transfer_key: !vault |
           32343966373032346233643436353166653236643666663134613963356464343961666565373666
           6232346130633334326664366130613261323661353837623031
 
+update_key: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          30653434653334666335373137373433616234313064306235336263343739666235383564386663
+          3262613063636464613837636336646632366536646530340a626330333236316162633737303133
+          31636266313339623138383266333937666532613366386231643066626439616166336338646466
+          3131623433333530640a633061346335316330333832633631363661353633656565646166653938
+          61653033363262346564636165323662643531643562323261333561656461393963613331666562
+          6435613366363739636639393364343639656236653639356230
+
+dns_cnames:
+  - cname: grafana
+    real: "{{ groups['grafana_servers'][0] }}"
+  - cname: influxdb
+    real: "{{ groups['influxDB_servers'][0] }}"
+  - cname: lb-1
+    real: "{{ groups['haproxy_servers'][0] }}"
+  - cname: lb-2
+    real: "{{ groups['haproxy_servers'][1] }}"
+  - cname: mysql-1
+    real: "{{ groups['db_servers'][0] }}"
+  - cname: mysql-2
+    real: "{{ groups['db_servers'][1] }}"
+  - cname: ns-1
+    real: "{{ groups['dns_master'][0] }}"
+  - cname: ns-2
+    real: "{{ groups['dns_slave'][0] }}"
+  - cname: prometheus
+    real: "{{ groups['prometheus_servers'][0] }}"
+  - cname: www-1
+    real: "{{ groups['web_servers'][0] }}"
+  - cname: www-2
+    real: "{{ groups['web_servers'][1] }}"
 
 
 

@@ -1,7 +1,7 @@
-; BIND data file for {{ startup_name }} zone
+; BIND data file for 168.192.in-addr.arpa zone
 ;
 $TTL    604800
-{{ startup_name }}.       IN      SOA     {{ startup_name }}. admin.{{ startup_name }}. (
+@       IN      SOA     ns.168.192.in-addr.arpa. admin.168.192.in-addr.arpa. (
                              3         ; Serial
                          604800         ; Refresh
                           86400         ; Retry
@@ -10,7 +10,7 @@ $TTL    604800
 
 ; NS records for each DNS server
 {% for host in groups['dns_servers'] %}
-{{ startup_name }}.  IN  NS   {{ host }}.{{ startup_name }}.
+168.192.in-addr.arpa.  IN  NS   {{ host }}.{{ startup_name }}.
 {% endfor %}
 
 ; A records for each NS record
@@ -18,4 +18,8 @@ $TTL    604800
 {{ dns_server }}  IN  A   {{ hostvars[dns_server]['ansible_default_ipv4']['address'] }}
 {% endfor %}
 
-
+; PTR records for VMs
+{% for dns_server in groups['dns_servers'] %}
+{% set ip_parts = hostvars[dns_server]['ansible_default_ipv4']['address'].split('.') %}
+{{ ip_parts[-1] }}.{{ ip_parts[-2] }}  IN  PTR  {{ hostvars[dns_server]['inventory_hostname'] }}.{{ startup_name }}.
+{% endfor %}

@@ -2,7 +2,8 @@
 zone "{{ startup_name }}" {
     type primary;
     allow-transfer { key "transfer.key"; };
-    file "db.{{ startup_name }}"; 
+    allow-update { key "update.key"; };
+    file "/var/cache/bind/db.{{ startup_name }}"; 
 };
 
 {% else %}
@@ -21,3 +22,10 @@ server {{ hostvars[master]['ansible_default_ipv4']['address'] }} {
 };
 {%   endfor %}
 {% endif %}
+
+zone "168.192.in-addr.arpa" {
+    type master;
+    allow-update { key "update.key"; };
+    file "/var/cache/bind/db.rev";
+};
+

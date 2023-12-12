@@ -1,6 +1,12 @@
+# - name: Update package lists
+#   apt:
+#     update_cache: yes
+
 - name: Install Bind9 package
   apt:
-    name: bind9
+    name:
+      - bind9
+      - python3-dnspython
     state: present
   tags: bind9
 
@@ -16,11 +22,23 @@
     dest: /etc/bind/named.conf.local
   notify: Restart bind9
 
-- name: Create DNS Zone File
+- name: Create DNS Zone File if not existing
   template:
     src: dns_zone.j2
-    dest: "/var/cache/bind/db.{{ startup_name }}"
+    dest: /var/cache/bind/db.{{ startup_name }}
+    force: no
+  notify: Reload Zone 
   # when: inventory_hostname in groups ['dns_master']
+
+- name: Create DNS Reverse Zone File if not existing
+  template:
+    src: dns_rev.j2
+    dest: /var/cache/bind/db.rev
+    force: no
+  notify: Reload Zone 
+  # when: inventory_hostname in groups ['dns_master']
+
+- meta: flush_handlers
 
 - name: Ensure bind9 service is started and enabled
   service:
@@ -28,8 +46,54 @@
     state: started
     enabled: yes
 
+- name: Add A record for backup server using nsupdate
+  community.general.nsupdate:
+    key_algorithm: "hmac-sha256"
+    key_name: "update.key"
+    key_secret: "{{ update_key }}"
+    server: "{{ groups['dns_servers'] | first }}"
+    zone: "{{ startup_name }}"
+    record: "backup"
+    type: "A"
+    value: "{{ backup_server_ip }}"
+    state: present
+  when: inventory_hostname == groups['dns_master'][0]
+
+
+- name: Add CNAME record
+  community.general.nsupdate:
+    key_algorithm: "hmac-sha256"
+    key_name: "update.key"
+    key_secret: "{{ update_key }}"
+    server: "{{ hostvars[groups['dns_master'][0]]['ansible_default_ipv4']['address'] }}"
+    zone: "{{ startup_name }}."
+    record: "{{ item['cname'] }}.{{ startup_name }}."
+    value: "{{ item['real'] }}.{{ startup_name }}."
+    type: "CNAME"
+  loop: "{{ dns_cnames }}"
+  when: inventory_hostname == groups['dns_master'][0]
+
+- name: Add A record for backup server using nsupdate for reverse zone
+  community.general.nsupdate:
+    key_algorithm: "hmac-sha256"
+    key_name: "update.key"
+    key_secret: "{{ update_key }}"
+    server: "{{ groups['dns_servers'] | first }}"
+    zone: 168.192.in-addr.arpa
+    record: "backup"
+    type: "PTR"
+    value: "{{ backup_server_ip_reversed }}"
+  when: inventory_hostname == groups['dns_master'][0]
+  notify: Restart bind9
+
+- meta: flush_handlers
+
+
+###########EXPORTERS######################
+
 - name: Include Exporter Tasks
   include_tasks: exporters/main.yaml
+
 
 
 

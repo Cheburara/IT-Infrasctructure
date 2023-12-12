@@ -15,6 +15,7 @@
     hosts: all
     roles:
       - resolver
+    tags: r
   
   - name: Database server
     hosts: db_servers
@@ -64,10 +65,3 @@
       # - uwsgi
       - nginx
     tags: web
-
-  - name: Nginx
-    hosts: all
-    roles:
-      - nginx
-    tags: ng
-

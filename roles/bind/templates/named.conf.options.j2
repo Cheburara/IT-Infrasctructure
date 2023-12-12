@@ -3,6 +3,12 @@ key "transfer.key" {
 	secret "{{ transfer_key }}";
 };
 
+key "update.key" {
+	algorithm hmac-sha256;
+	secret "{{ update_key}}";
+};
+
+
 options {
     directory "/var/cache/bind";
 
@@ -24,4 +30,3 @@ options {
 statistics-channels {
     inet 127.0.0.1 port 8053; 
 }; 
-
