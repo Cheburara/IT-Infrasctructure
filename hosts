@@ -1,5 +1,6 @@
 cheburara-1 ansible_host=193.40.156.67 ansible_port=16422 ansible_user=ubuntu
 cheburara-2 ansible_host=193.40.156.67 ansible_port=3622 ansible_user=ubuntu
+cheburara-3 ansible_host=193.40.156.67 ansible_port=15822 ansible_user=ubuntu
 
 
 [db_servers]
@@ -7,9 +8,10 @@ cheburara-1
 cheburara-2
 
 [dns_master]
-cheburara-1
+cheburara-3
 
 [dns_slave]
+cheburara-1
 cheburara-2
 
 [dns_servers:children]
@@ -17,16 +19,16 @@ dns_master
 dns_slave
 
 [prometheus_servers]
-cheburara-2
+cheburara-3
 
 [grafana_servers]
-cheburara-2
+cheburara-3
 
 [influxDB_servers]
-cheburara-2
+cheburara-3
 
 [pinger_servers]
-cheburara-2
+cheburara-3
 
 [web_servers]
 cheburara-1

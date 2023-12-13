@@ -3,15 +3,20 @@
     apt_key:
       url: https://repos.influxdata.com/influxdata-archive_compat.key
       state: present
+  
+  - name: Create destination directory
+    file:
+      path: /usr/bin/influx
+      state: directory
 
   - name: Download InfluxDB 1.8.10 package
     get_url:
       url: https://dl.influxdata.com/influxdb/releases/influxdb_1.8.10_amd64.deb
-      dest: /tmp/influxdb_1.8.10_amd64.deb
+      dest: /usr/bin/influx/influxdb_1.8.10_amd64.deb
 
   - name: Install InfluxDB
     apt:
-      deb: /tmp/influxdb_1.8.10_amd64.deb
+      deb: /usr/bin/influx/influxdb_1.8.10_amd64.deb
       state: present
 
   - name: Update package repositories and upgrade packages

@@ -4,6 +4,7 @@
     roles:
       - init
     # tags: always
+    tags: init
 
   - name: DNS server
     hosts: dns_servers

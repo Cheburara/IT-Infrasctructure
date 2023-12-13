@@ -17,8 +17,8 @@
     src: influxdb-stats-exporter.service.j2
     dest: /etc/systemd/system/prometheus-influxdb-stats-exporter.service
 
-- name: Unmask the pinger service
-  command: systemctl unmask prometheus-influxdb-stats-exporter
+# - name: Unmask the pinger service
+#   command: systemctl unmask prometheus-influxdb-stats-exporter
 
 - name: Enable and start InfluxDB Stats Exporter
   systemd:

@@ -34,3 +34,10 @@ listen my_ha_frontend
         server agama-{{ host | replace(".", "") }}-{{ item + 1 }} {{ host }}:{{ agama_port + item }} check
     {% endfor %}
 {% endfor %}
+
+listen frontend 
+	bind *:{{ prometheus_exporter_port }}
+	mode http
+	stats enable	
+	stats uri /stats
+	stats refresh 5s

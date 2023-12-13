@@ -35,12 +35,11 @@
         dest: /etc/systemd/system/pinger.service
       notify: Reload systemd
     
-    - name: Unmask the pinger service
-      command: systemctl unmask pinger.service
+    # - name: Unmask the pinger service
+    #   command: systemctl unmask pinger.service
 
     - name: Start and enable the pinger service
       systemd:
         name: pinger
         enabled: yes
         state: started
-      notify: Restart pinger
