@@ -39,6 +39,7 @@
     - { src: 'syslog.json', dest: '/opt/grafana/provisioning/dashboards/syslog.json' }
     - { src: 'mysql.json', dest: '/opt/grafana/provisioning/dashboards/mysql.json' }
     - { src: 'haproxy_keepalived.json', dest: '/opt/grafana/provisioning/dashboards/haproxy_keepalived.json' }
+    - { src: 'status.json', dest: '/opt/grafana/provisioning/dashboards/status.json' }
   notify: Restart Grafana Container
 
 
