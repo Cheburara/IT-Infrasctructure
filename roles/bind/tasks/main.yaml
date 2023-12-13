@@ -58,6 +58,7 @@
     value: "{{ backup_server_ip }}"
     state: present
   when: inventory_hostname == groups['dns_master'][0]
+  no_log: true
 
 
 - name: Add CNAME record
@@ -72,6 +73,7 @@
     type: "CNAME"
   loop: "{{ dns_cnames }}"
   when: inventory_hostname == groups['dns_master'][0]
+  no_log: true
 
 - name: Add A record for backup server using nsupdate for reverse zone
   community.general.nsupdate:
@@ -84,6 +86,7 @@
     type: "PTR"
     value: "{{ backup_server_ip_reversed }}"
   when: inventory_hostname == groups['dns_master'][0]
+  no_log: true
   notify: Restart bind9
 
 - meta: flush_handlers

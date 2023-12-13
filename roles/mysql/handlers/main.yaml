@@ -28,8 +28,8 @@
   when: inventory_hostname != mysql_host
 
 - name: Restart Prometheus MySQL Exporter
-  service:
+  systemd:
     name: prometheus-mysqld-exporter
     state: restarted
-  become: yes
+
 

@@ -29,6 +29,7 @@
       src: keepalived.conf.j2  
       dest: /etc/keepalived/keepalived.conf 
     notify: restart keepalived
+    no_log: true
   
   - name: Enable keepalived
     service: 
