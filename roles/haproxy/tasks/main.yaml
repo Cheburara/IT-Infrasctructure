@@ -9,6 +9,12 @@
       dest: /etc/haproxy/haproxy.cfg
     notify: Restart HAProxy
 
+  - name: Ensure HAProxy is enabled  
+    service: 
+      name: haproxy
+      state: started
+      enabled: yes 
+
 ########EXPORTES#########
 
   - name: HAProxy exporters
@@ -21,6 +27,12 @@
       path: /etc/default/prometheus-haproxy-exporter
       line: 'ARGS="--haproxy.scrape-uri=http://localhost:{{ haproxy_port }}/haproxy/stats;csv"'
     notify: Restart prometheus-haproxy-exporter
+  
+  - name: Ensure HAProxy exporter is enabled
+    service: 
+      name: prometheus-haproxy-exporter
+      state: started
+      enabled: yes 
 
 
   

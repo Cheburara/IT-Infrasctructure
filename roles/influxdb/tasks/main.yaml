@@ -77,7 +77,7 @@
       dest: /etc/cron.d/influxdb-backup
       mode: '0644'
     notify: Restart InfluxDb service
-    tags: sos
+  
 
 
 
