@@ -18,6 +18,7 @@
   template:
     src: my.cnf.j2
     dest: /var/lib/prometheus/.my.cnf
+  no_log: true
 
 - name: Update Prometheus MySQL Exporter for Replication Metrics
   lineinfile:

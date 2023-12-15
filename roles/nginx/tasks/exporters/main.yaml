@@ -3,11 +3,6 @@
     name: prometheus-nginx-exporter
     state: present
 
-# - name: Create Nginx exporter service
-#   copy:
-#     src: default.conf
-#     dest: /etc/nginx/conf.d/nginx_status.conf
-
 - name: Enable exporter service
   service:
     name: prometheus-nginx-exporter

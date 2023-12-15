@@ -5,7 +5,7 @@
       - python3-docker
     state: present
 
-- name: Install Docker service
+- name: Enable Docker service
   service:
     name: docker
     state: started
