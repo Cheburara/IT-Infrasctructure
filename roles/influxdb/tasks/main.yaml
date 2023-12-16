@@ -8,6 +8,8 @@
     file:
       path: /usr/bin/influx
       state: directory
+      mode: '0755'
+
 
   - name: Download InfluxDB 1.8.10 package
     get_url:
@@ -19,9 +21,9 @@
       deb: /usr/bin/influx/influxdb_1.8.10_amd64.deb
       state: present
 
-  - name: Update package repositories and upgrade packages
-    apt:
-      update_cache: yes
+  # - name: Update package repositories and upgrade packages
+  #   apt:
+  #     update_cache: yes
   
   - name: Copy InfluxDB configuration file
     template: 
