@@ -8,6 +8,9 @@
       name: telegraf
       state: restarted 
   
+  - name: Reload systemd
+    command: systemctl daemon-reload
+  
   - name: Restart InfluxDB Stats Exporter
     systemd:
       name: prometheus-influxdb-stats-exporter

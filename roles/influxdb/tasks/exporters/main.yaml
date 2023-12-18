@@ -2,27 +2,24 @@
   uri:
     url: https://api.github.com/repos/carlpett/influxdb_stats_exporter/releases/latest
     return_content: yes
+    mode: '0755'
   register: latest_release
 
 - name: Download InfluxDB Stats Exporter binary
   get_url:
     url: "https://github.com/carlpett/influxdb_stats_exporter/releases/download/v0.1.1/influx_stats_exporter_linux_amd64"
     dest: /usr/local/bin/influxdb_stats_exporter
-
-# - name: Set permissions for InfluxDB Stats Exporter binary
-#   command: chmod +x /usr/local/bin/influxdb_stats_exporter
+    mode: '0755'
 
 - name: Create systemd service for InfluxDB Stats Exporter
   template:
     src: influxdb-stats-exporter.service.j2
     dest: /etc/systemd/system/prometheus-influxdb-stats-exporter.service
-
-# - name: Unmask the pinger service
-#   command: systemctl unmask prometheus-influxdb-stats-exporter
+  notify: Restart InfluxDB Stats Exporter
 
 - name: Enable and start InfluxDB Stats Exporter
   systemd:
     name: prometheus-influxdb-stats-exporter
     state: started
     enabled: yes
-  notify: Restart InfluxDB Stats Exporter
+    daemon_reload: yes

@@ -1,46 +1,19 @@
 ---
+ - name: Create destination directory
+    file:
+      path: /opt/influx
+      state: directory
+      mode: '0755'
+
   - name: Download InfluxDB 1.8.10 package
     get_url:
       url: https://dl.influxdata.com/influxdb/releases/influxdb_1.8.10_amd64.deb
-  
+      dest: /opt/influx/influxdb_1.8.10_amd64.deb
+
   - name: Install InfluxDB
     apt:
-      deb: /opt/influxdb_1.8.10_amd64.deb
+      deb: /opt/influx/influxdb_1.8.10_amd64.deb
       state: present
-  
-  - name: Add InfluxData GPG key
-    apt_key:
-      url: https://repos.influxdata.com/influxdata-archive_compat.key
-      state: present
-
-  - name: Add InfluxDb repository
-    apt_repository:
-      repo: deb https://repos.influxdata.com/debian stable main
-  
-  # - name: Add InfluxData GPG key
-  #   apt_key:
-  #     url: https://repos.influxdata.com/influxdata-archive_compat.key
-  #     state: present
-  
-  # - name: Create destination directory
-  #   file:
-  #     path: /usr/bin/influx
-  #     state: directory
-  #     mode: '0755'
-
-  # - name: Download InfluxDB 1.8.10 package
-  #   get_url:
-  #     url: https://dl.influxdata.com/influxdb/releases/influxdb_1.8.10_amd64.deb
-  #     dest: /usr/bin/influx/influxdb_1.8.10_amd64.deb
-
-  # - name: Install InfluxDB
-  #   apt:
-  #     deb: /usr/bin/influx/influxdb_1.8.10_amd64.deb
-  #     state: present
-
-  # - name: Update package repositories and upgrade packages
-  #   apt:
-  #     update_cache: yes
   
   - name: Copy InfluxDB configuration file
     template: 
@@ -53,6 +26,11 @@
       name: influxdb
       state: started
       enabled: yes
+
+  - name: Add InfluxData GPG key
+    apt_key:
+      url: https://repos.influxdata.com/influxdata-archive_compat.key
+      state: present
   
 ##################################TELEGRAF#########################################
 
