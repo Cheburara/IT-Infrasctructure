@@ -1,5 +1,5 @@
 ---
- - name: Create destination directory
+  - name: Create destination directory
     file:
       path: /opt/influx
       state: directory
