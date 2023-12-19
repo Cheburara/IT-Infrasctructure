@@ -17,11 +17,21 @@
       owner: mysql
       group: mysql
     notify: Restart Mysql
+  
+  - name: Ensure mysql service is started and enabled
+    service:
+      name: mysql
+      state: started
+      enabled: yes
 
   - name: MySQL database
     community.mysql.mysql_db:
       name: "{{ mysql_database }}"
       login_unix_socket: /var/run/mysqld/mysqld.sock
+      state: present
+    notify:
+    - Restart mysql source
+    - Restart mysql replica
 
   - name: MySQL user
     community.mysql.mysql_user:

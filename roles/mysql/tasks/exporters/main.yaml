@@ -25,6 +25,7 @@
     path: /etc/default/prometheus-mysqld-exporter
     line: 'ARGS="--collect.slave_status"'
   notify:
+    - Restart Mysql
     - Restart Prometheus MySQL Exporter
 
 - name: Ensure Exporter Restarts 
