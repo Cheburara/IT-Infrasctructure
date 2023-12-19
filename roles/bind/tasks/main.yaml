@@ -14,12 +14,14 @@
   template:
     src: named.conf.options.j2
     dest: /etc/bind/named.conf.options
+  no_log: true
   notify: Restart bind9
 
 - name: Create configuration bind9 for master and slave
   template:
     src: named.conf.local.j2
     dest: /etc/bind/named.conf.local
+  no_log: true
   notify: Restart bind9
 
 - name: Create DNS Zone File if not existing
