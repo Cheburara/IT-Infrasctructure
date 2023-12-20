@@ -45,11 +45,11 @@
   - name: Include Exporter Tasks
     include_tasks: exporters/main.yaml
 
-  - name: Ensure mysql service is started and enabled
-    service:
-      name: mysql
-      state: started
-      enabled: yes
+  # - name: Ensure mysql service is started and enabled
+  #   service:
+  #     name: mysql
+  #     state: started
+  #     enabled: yes
   
 #########BACKUP##########
 

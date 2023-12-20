@@ -1,2 +1,2 @@
-0 13 * * * backup influxd backup -portable -database telegraf /home/backup/influxdb && duplicity --no-encryption full /home/backup/influxdb rsync://Cheburara@backup.{{ startup_name }}/influxdb
-# 0 13 * * 1-6 backup influxd backup -portable -database telegraf /home/backup/influxdb && duplicity --no-encryption incremental /home/backup/influxdb rsync://Cheburara@backup.{{ startup_name }}/influxdb
+0 13 * * 7 backup influxd backup -portable -database telegraf /home/backup/influxdb && duplicity --no-encryption full /home/backup/influxdb rsync://Cheburara@backup.{{ startup_name }}/influxdb
+0 13 * * 1-6 backup influxd backup -portable -database telegraf /home/backup/influxdb && duplicity --no-encryption incremental /home/backup/influxdb rsync://Cheburara@backup.{{ startup_name }}/influxdb

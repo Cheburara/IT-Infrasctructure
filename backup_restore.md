@@ -25,8 +25,8 @@ sudo su - backup
 Step 2: Identify the backup version to restore
 duplicity collection-status rsync://Cheburara@backup.{{ startup_name }}/influxdb
 
-Step 3: Copy the SQL file using rsync
-rsync -v Cheburara@backup.{{ startup_name }}/path/to/influxdb-backup /home/backup/restore/influxdb
+Step 3: Copy the Influxdb file using rsync
+rsync -v Cheburara@backup.{{ startup_name }}/path/to/influxdb /home/backup/restore/influxdb
 
 Step 4: Restore InfluxDB Data
 duplicity restore --no-encryption /home/backup/restore/influxdb
