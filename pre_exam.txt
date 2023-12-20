@@ -1,18 +1,18 @@
-T 19 dets  2023 14:47:54 EET
+K 20 dets  2023 12:21:51 EET
 cheba-Aspire-A315-43
 [WARNING]: Collection community.general does not support Ansible version 2.10.8
 
 PLAY [Initial setup] ***********************************************************
 
 TASK [Gathering Facts] *********************************************************
+ok: [cheburara-2]
 ok: [cheburara-3]
 ok: [cheburara-1]
-ok: [cheburara-2]
 
 TASK [init : Update APT cache] *************************************************
 changed: [cheburara-3]
-changed: [cheburara-2]
 changed: [cheburara-1]
+changed: [cheburara-2]
 
 TASK [init : Install Prometheus Node Exporter] *********************************
 The following additional packages will be installed:
@@ -36,7 +36,7 @@ The following NEW packages will be installed:
   moreutils prometheus-node-exporter prometheus-node-exporter-collectors
   smartmontools
 0 upgraded, 8 newly installed, 0 to remove and 265 not upgraded.
-changed: [cheburara-2]
+changed: [cheburara-1]
 The following additional packages will be installed:
   libio-pty-perl libipc-run-perl libtime-duration-perl libtimedate-perl
   moreutils prometheus-node-exporter-collectors smartmontools
@@ -47,35 +47,35 @@ The following NEW packages will be installed:
   moreutils prometheus-node-exporter prometheus-node-exporter-collectors
   smartmontools
 0 upgraded, 8 newly installed, 0 to remove and 265 not upgraded.
-changed: [cheburara-1]
+changed: [cheburara-2]
 
 TASK [init : Start and Enable Node Exporter Service] ***************************
-ok: [cheburara-3]
 ok: [cheburara-2]
+ok: [cheburara-3]
 ok: [cheburara-1]
 
 TASK [init : Install up-to-date CA certificates] *******************************
 The following packages will be upgraded:
   ca-certificates
 1 upgraded, 0 newly installed, 0 to remove and 264 not upgraded.
-changed: [cheburara-3]
-The following packages will be upgraded:
-  ca-certificates
-1 upgraded, 0 newly installed, 0 to remove and 264 not upgraded.
 changed: [cheburara-2]
 The following packages will be upgraded:
   ca-certificates
 1 upgraded, 0 newly installed, 0 to remove and 264 not upgraded.
 changed: [cheburara-1]
+The following packages will be upgraded:
+  ca-certificates
+1 upgraded, 0 newly installed, 0 to remove and 264 not upgraded.
+changed: [cheburara-3]
 
 TASK [init : Install rsyslog] **************************************************
+ok: [cheburara-1]
 ok: [cheburara-2]
 ok: [cheburara-3]
-ok: [cheburara-1]
 
 TASK [init : Create a custom rsyslog configuration file] ***********************
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpw649uuju/rsyslog.conf.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmp76276vjg/rsyslog.conf.j2
 @@ -0,0 +1,9 @@
 +$WorkDirectory /var/spool/rsyslog  
 +$ActionQueueType LinkedList  
@@ -89,21 +89,7 @@ TASK [init : Create a custom rsyslog configuration file] ***********************
 
 changed: [cheburara-2]
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpp4kqnh9z/rsyslog.conf.j2
-@@ -0,0 +1,9 @@
-+$WorkDirectory /var/spool/rsyslog  
-+$ActionQueueType LinkedList  
-+$ActionQueueFileName srvrfwd  
-+$ActionResumeRetryCount -1  
-+$ActionQueueSaveOnShutdown on  
-+$ModLoad imudp #loads the udp module  
-+$UDPServerAddress localhost 
-+$UDPServerRun 514 
-+*.*@@localhost:6514;RSYSLOG_SyslogProtocol23Format
-
-changed: [cheburara-3]
---- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpqroc5m13/rsyslog.conf.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpqs7ikol3/rsyslog.conf.j2
 @@ -0,0 +1,9 @@
 +$WorkDirectory /var/spool/rsyslog  
 +$ActionQueueType LinkedList  
@@ -116,35 +102,57 @@ changed: [cheburara-3]
 +*.*@@localhost:6514;RSYSLOG_SyslogProtocol23Format
 
 changed: [cheburara-1]
+--- before
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmp7vl_grgz/rsyslog.conf.j2
+@@ -0,0 +1,9 @@
++$WorkDirectory /var/spool/rsyslog  
++$ActionQueueType LinkedList  
++$ActionQueueFileName srvrfwd  
++$ActionResumeRetryCount -1  
++$ActionQueueSaveOnShutdown on  
++$ModLoad imudp #loads the udp module  
++$UDPServerAddress localhost 
++$UDPServerRun 514 
++*.*@@localhost:6514;RSYSLOG_SyslogProtocol23Format
+
+changed: [cheburara-3]
 
 TASK [init : Modify a custom rsyslog configuration file] ***********************
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpu7f5b620/rsyslog.confadvanced.j2
-@@ -0,0 +1 @@
-+action(type="omfwd" Protocol="udp" Target="influxdb" Port="6514" Template="RSYSLOG_SyslogProtocol23Format")
-
-changed: [cheburara-3]
---- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpq7e2fylg/rsyslog.confadvanced.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpix55slro/rsyslog.confadvanced.j2
 @@ -0,0 +1 @@
 +action(type="omfwd" Protocol="udp" Target="influxdb" Port="6514" Template="RSYSLOG_SyslogProtocol23Format")
 
 changed: [cheburara-2]
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmp42_2d9zj/rsyslog.confadvanced.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmp1cs1w_k_/rsyslog.confadvanced.j2
 @@ -0,0 +1 @@
 +action(type="omfwd" Protocol="udp" Target="influxdb" Port="6514" Template="RSYSLOG_SyslogProtocol23Format")
 
 changed: [cheburara-1]
+--- before
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmp8xlnfmwl/rsyslog.confadvanced.j2
+@@ -0,0 +1 @@
++action(type="omfwd" Protocol="udp" Target="influxdb" Port="6514" Template="RSYSLOG_SyslogProtocol23Format")
+
+changed: [cheburara-3]
 
 TASK [init : Ensure the user 'backup' exists with a unique SSH key] ************
-changed: [cheburara-2]
 changed: [cheburara-3]
 changed: [cheburara-1]
+changed: [cheburara-2]
 
 TASK [init : Create known_hosts file for user backup] **************************
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpync9y_pb/known_hosts.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmp90554j5x/known_hosts.j2
+@@ -0,0 +1,3 @@
++192.168.42.132 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
++backup ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
++backup.chebariss.io ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
+
+changed: [cheburara-1]
+--- before
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpbyo82jf9/known_hosts.j2
 @@ -0,0 +1,3 @@
 +192.168.42.132 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
 +backup ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
@@ -152,21 +160,13 @@ TASK [init : Create known_hosts file for user backup] **************************
 
 changed: [cheburara-3]
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpvi9v6caz/known_hosts.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmport3eya_/known_hosts.j2
 @@ -0,0 +1,3 @@
 +192.168.42.132 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
 +backup ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
 +backup.chebariss.io ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
 
 changed: [cheburara-2]
---- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmp2o0brrsr/known_hosts.j2
-@@ -0,0 +1,3 @@
-+192.168.42.132 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
-+backup ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
-+backup.chebariss.io ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
-
-changed: [cheburara-1]
 
 TASK [init : Ensure /home/backup/restore directory exists] *********************
 --- before
@@ -182,7 +182,7 @@ TASK [init : Ensure /home/backup/restore directory exists] *********************
 +    "state": "directory"
  }
 
-changed: [cheburara-2]
+changed: [cheburara-1]
 --- before
 +++ after
 @@ -1,6 +1,6 @@
@@ -210,7 +210,7 @@ changed: [cheburara-3]
 +    "state": "directory"
  }
 
-changed: [cheburara-1]
+changed: [cheburara-2]
 
 TASK [init : Ensure Duplicity is installed] ************************************
 The following additional packages will be installed:
@@ -248,16 +248,16 @@ The following NEW packages will be installed:
 changed: [cheburara-1]
 
 RUNNING HANDLER [init : Restart rsyslog] ***************************************
+changed: [cheburara-1]
 changed: [cheburara-2]
 changed: [cheburara-3]
-changed: [cheburara-1]
 
 PLAY [DNS server] **************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [cheburara-2]
-ok: [cheburara-3]
 ok: [cheburara-1]
+ok: [cheburara-3]
+ok: [cheburara-2]
 
 TASK [bind : Install Bind9 package] ********************************************
 The following additional packages will be installed:
@@ -269,6 +269,16 @@ The following NEW packages will be installed:
 The following packages will be upgraded:
   bind9-dnsutils bind9-libs
 2 upgraded, 5 newly installed, 0 to remove and 262 not upgraded.
+changed: [cheburara-1]
+The following additional packages will be installed:
+  bind9-dnsutils bind9-libs bind9-utils dns-root-data python3-ply
+Suggested packages:
+  bind-doc resolvconf python-ply-doc
+The following NEW packages will be installed:
+  bind9 bind9-utils dns-root-data python3-dnspython python3-ply
+The following packages will be upgraded:
+  bind9-dnsutils bind9-libs
+2 upgraded, 5 newly installed, 0 to remove and 262 not upgraded.
 changed: [cheburara-3]
 The following additional packages will be installed:
   bind9-dnsutils bind9-libs bind9-utils dns-root-data python3-ply
@@ -280,30 +290,20 @@ The following packages will be upgraded:
   bind9-dnsutils bind9-libs
 2 upgraded, 5 newly installed, 0 to remove and 262 not upgraded.
 changed: [cheburara-2]
-The following additional packages will be installed:
-  bind9-dnsutils bind9-libs bind9-utils dns-root-data python3-ply
-Suggested packages:
-  bind-doc resolvconf python-ply-doc
-The following NEW packages will be installed:
-  bind9 bind9-utils dns-root-data python3-dnspython python3-ply
-The following packages will be upgraded:
-  bind9-dnsutils bind9-libs
-2 upgraded, 5 newly installed, 0 to remove and 262 not upgraded.
-changed: [cheburara-1]
 
 TASK [bind : Create configuration bind9 file] **********************************
+changed: [cheburara-1]
 changed: [cheburara-3]
 changed: [cheburara-2]
-changed: [cheburara-1]
 
 TASK [bind : Create configuration bind9 for master and slave] ******************
 changed: [cheburara-3]
-changed: [cheburara-2]
 changed: [cheburara-1]
+changed: [cheburara-2]
 
 TASK [bind : Create DNS Zone File if not existing] *****************************
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpkwy_4g42/dns_zone.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpf0vvaxno/dns_zone.j2
 @@ -0,0 +1,21 @@
 +; BIND data file for chebariss.io zone
 +;
@@ -321,15 +321,15 @@ TASK [bind : Create DNS Zone File if not existing] *****************************
 +chebariss.io.  IN  NS   cheburara-2.chebariss.io.
 +
 +; A records for each NS record
-+cheburara-3  IN  A   192.168.42.192
-+cheburara-1  IN  A   192.168.42.128
-+cheburara-2  IN  A   192.168.42.193
++cheburara-3  IN  A   192.168.43.96
++cheburara-1  IN  A   192.168.43.197
++cheburara-2  IN  A   192.168.43.24
 +
 +
 
 changed: [cheburara-3]
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpzsoxz9gr/dns_zone.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpc0p6vgl3/dns_zone.j2
 @@ -0,0 +1,21 @@
 +; BIND data file for chebariss.io zone
 +;
@@ -347,43 +347,43 @@ changed: [cheburara-3]
 +chebariss.io.  IN  NS   cheburara-2.chebariss.io.
 +
 +; A records for each NS record
-+cheburara-3  IN  A   192.168.42.192
-+cheburara-1  IN  A   192.168.42.128
-+cheburara-2  IN  A   192.168.42.193
-+
-+
-
-changed: [cheburara-2]
---- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmph6bji4ze/dns_zone.j2
-@@ -0,0 +1,21 @@
-+; BIND data file for chebariss.io zone
-+;
-+$TTL    604800
-+chebariss.io.       IN      SOA     chebariss.io. admin.chebariss.io. (
-+                             3         ; Serial
-+                         604800         ; Refresh
-+                          86400         ; Retry
-+                        2419200         ; Expire
-+                         604800 )       ; Negative Cache TTL
-+
-+; NS records for each DNS server
-+chebariss.io.  IN  NS   cheburara-3.chebariss.io.
-+chebariss.io.  IN  NS   cheburara-1.chebariss.io.
-+chebariss.io.  IN  NS   cheburara-2.chebariss.io.
-+
-+; A records for each NS record
-+cheburara-3  IN  A   192.168.42.192
-+cheburara-1  IN  A   192.168.42.128
-+cheburara-2  IN  A   192.168.42.193
++cheburara-3  IN  A   192.168.43.96
++cheburara-1  IN  A   192.168.43.197
++cheburara-2  IN  A   192.168.43.24
 +
 +
 
 changed: [cheburara-1]
+--- before
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmplt4obb37/dns_zone.j2
+@@ -0,0 +1,21 @@
++; BIND data file for chebariss.io zone
++;
++$TTL    604800
++chebariss.io.       IN      SOA     chebariss.io. admin.chebariss.io. (
++                             3         ; Serial
++                         604800         ; Refresh
++                          86400         ; Retry
++                        2419200         ; Expire
++                         604800 )       ; Negative Cache TTL
++
++; NS records for each DNS server
++chebariss.io.  IN  NS   cheburara-3.chebariss.io.
++chebariss.io.  IN  NS   cheburara-1.chebariss.io.
++chebariss.io.  IN  NS   cheburara-2.chebariss.io.
++
++; A records for each NS record
++cheburara-3  IN  A   192.168.43.96
++cheburara-1  IN  A   192.168.43.197
++cheburara-2  IN  A   192.168.43.24
++
++
+
+changed: [cheburara-2]
 
 TASK [bind : Create DNS Reverse Zone File if not existing] *********************
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpl0r5km7c/dns_rev.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpbylu73tu/dns_rev.j2
 @@ -0,0 +1,24 @@
 +; BIND data file for 168.192.in-addr.arpa zone
 +;
@@ -401,18 +401,47 @@ TASK [bind : Create DNS Reverse Zone File if not existing] *********************
 +168.192.in-addr.arpa.  IN  NS   cheburara-2.chebariss.io.
 +
 +; A records for each NS record
-+cheburara-3  IN  A   192.168.42.192
-+cheburara-1  IN  A   192.168.42.128
-+cheburara-2  IN  A   192.168.42.193
++cheburara-3  IN  A   192.168.43.96
++cheburara-1  IN  A   192.168.43.197
++cheburara-2  IN  A   192.168.43.24
 +
 +; PTR records for VMs
-+192.42  IN  PTR  cheburara-3.chebariss.io.
-+128.42  IN  PTR  cheburara-1.chebariss.io.
-+193.42  IN  PTR  cheburara-2.chebariss.io.
++96.43  IN  PTR  cheburara-3.chebariss.io.
++197.43  IN  PTR  cheburara-1.chebariss.io.
++24.43  IN  PTR  cheburara-2.chebariss.io.
+
+changed: [cheburara-1]
+--- before
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpib_iu9e7/dns_rev.j2
+@@ -0,0 +1,24 @@
++; BIND data file for 168.192.in-addr.arpa zone
++;
++$TTL    604800
++@       IN      SOA     ns.168.192.in-addr.arpa. admin.168.192.in-addr.arpa. (
++                             3         ; Serial
++                         604800         ; Refresh
++                          86400         ; Retry
++                        2419200         ; Expire
++                         604800 )       ; Negative Cache TTL
++
++; NS records for each DNS server
++168.192.in-addr.arpa.  IN  NS   cheburara-3.chebariss.io.
++168.192.in-addr.arpa.  IN  NS   cheburara-1.chebariss.io.
++168.192.in-addr.arpa.  IN  NS   cheburara-2.chebariss.io.
++
++; A records for each NS record
++cheburara-3  IN  A   192.168.43.96
++cheburara-1  IN  A   192.168.43.197
++cheburara-2  IN  A   192.168.43.24
++
++; PTR records for VMs
++96.43  IN  PTR  cheburara-3.chebariss.io.
++197.43  IN  PTR  cheburara-1.chebariss.io.
++24.43  IN  PTR  cheburara-2.chebariss.io.
 
 changed: [cheburara-3]
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpow0fkr9t/dns_rev.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpq_a821e_/dns_rev.j2
 @@ -0,0 +1,24 @@
 +; BIND data file for 168.192.in-addr.arpa zone
 +;
@@ -430,60 +459,31 @@ changed: [cheburara-3]
 +168.192.in-addr.arpa.  IN  NS   cheburara-2.chebariss.io.
 +
 +; A records for each NS record
-+cheburara-3  IN  A   192.168.42.192
-+cheburara-1  IN  A   192.168.42.128
-+cheburara-2  IN  A   192.168.42.193
++cheburara-3  IN  A   192.168.43.96
++cheburara-1  IN  A   192.168.43.197
++cheburara-2  IN  A   192.168.43.24
 +
 +; PTR records for VMs
-+192.42  IN  PTR  cheburara-3.chebariss.io.
-+128.42  IN  PTR  cheburara-1.chebariss.io.
-+193.42  IN  PTR  cheburara-2.chebariss.io.
++96.43  IN  PTR  cheburara-3.chebariss.io.
++197.43  IN  PTR  cheburara-1.chebariss.io.
++24.43  IN  PTR  cheburara-2.chebariss.io.
 
 changed: [cheburara-2]
---- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpy_f9hv9l/dns_rev.j2
-@@ -0,0 +1,24 @@
-+; BIND data file for 168.192.in-addr.arpa zone
-+;
-+$TTL    604800
-+@       IN      SOA     ns.168.192.in-addr.arpa. admin.168.192.in-addr.arpa. (
-+                             3         ; Serial
-+                         604800         ; Refresh
-+                          86400         ; Retry
-+                        2419200         ; Expire
-+                         604800 )       ; Negative Cache TTL
-+
-+; NS records for each DNS server
-+168.192.in-addr.arpa.  IN  NS   cheburara-3.chebariss.io.
-+168.192.in-addr.arpa.  IN  NS   cheburara-1.chebariss.io.
-+168.192.in-addr.arpa.  IN  NS   cheburara-2.chebariss.io.
-+
-+; A records for each NS record
-+cheburara-3  IN  A   192.168.42.192
-+cheburara-1  IN  A   192.168.42.128
-+cheburara-2  IN  A   192.168.42.193
-+
-+; PTR records for VMs
-+192.42  IN  PTR  cheburara-3.chebariss.io.
-+128.42  IN  PTR  cheburara-1.chebariss.io.
-+193.42  IN  PTR  cheburara-2.chebariss.io.
-
-changed: [cheburara-1]
 
 RUNNING HANDLER [bind : Restart bind9] *****************************************
-changed: [cheburara-3]
 changed: [cheburara-1]
+changed: [cheburara-3]
 changed: [cheburara-2]
 
 RUNNING HANDLER [bind : Reload Zone] *******************************************
+changed: [cheburara-1]
 changed: [cheburara-3]
 changed: [cheburara-2]
-changed: [cheburara-1]
 
 TASK [bind : Ensure bind9 service is started and enabled] **********************
+ok: [cheburara-1]
 ok: [cheburara-3]
 ok: [cheburara-2]
-ok: [cheburara-1]
 
 TASK [bind : Add A record for backup server using nsupdate] ********************
 skipping: [cheburara-1]
@@ -494,7 +494,6 @@ TASK [bind : Add CNAME record] *************************************************
 skipping: [cheburara-1] => (item=None) 
 skipping: [cheburara-1] => (item=None) 
 skipping: [cheburara-1] => (item=None) 
-skipping: [cheburara-2] => (item=None) 
 skipping: [cheburara-1] => (item=None) 
 skipping: [cheburara-2] => (item=None) 
 skipping: [cheburara-1] => (item=None) 
@@ -511,6 +510,7 @@ skipping: [cheburara-1] => (item=None)
 skipping: [cheburara-2] => (item=None) 
 skipping: [cheburara-1] => (item=None) 
 skipping: [cheburara-1]
+skipping: [cheburara-2] => (item=None) 
 skipping: [cheburara-2] => (item=None) 
 skipping: [cheburara-2] => (item=None) 
 skipping: [cheburara-2] => (item=None) 
@@ -543,7 +543,7 @@ TASK [bind : Install Bind9 exporter from Ubuntu package repository] ************
 The following NEW packages will be installed:
   prometheus-bind-exporter
 0 upgraded, 1 newly installed, 0 to remove and 262 not upgraded.
-changed: [cheburara-2]
+changed: [cheburara-3]
 The following NEW packages will be installed:
   prometheus-bind-exporter
 0 upgraded, 1 newly installed, 0 to remove and 262 not upgraded.
@@ -551,23 +551,23 @@ changed: [cheburara-1]
 The following NEW packages will be installed:
   prometheus-bind-exporter
 0 upgraded, 1 newly installed, 0 to remove and 262 not upgraded.
-changed: [cheburara-3]
+changed: [cheburara-2]
 
 TASK [bind : Enable Bind9 exporter] ********************************************
-ok: [cheburara-2]
 ok: [cheburara-3]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 PLAY [Resolver] ****************************************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [cheburara-3]
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [resolver : Configure /etc/resolv.conf] ***********************************
 --- before: /etc/resolv.conf
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpz1hqpwv9/resolv.cnf.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpp45klhtg/resolv.cnf.j2
 @@ -1,19 +1,4 @@
 -# This file is managed by man:systemd-resolved(8). Do not edit.
 -#
@@ -589,12 +589,12 @@ TASK [resolver : Configure /etc/resolv.conf] ***********************************
 -nameserver 127.0.0.53
 -options edns0 trust-ad
 -search openstacklocal
-+nameserver 192.168.42.128
-+nameserver 192.168.42.193
++nameserver 192.168.43.197
++nameserver 192.168.43.24
 
 changed: [cheburara-3]
 --- before: /etc/resolv.conf
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpgcar1ij6/resolv.cnf.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpmsw_q_ba/resolv.cnf.j2
 @@ -1,19 +1,4 @@
 -# This file is managed by man:systemd-resolved(8). Do not edit.
 -#
@@ -616,12 +616,12 @@ changed: [cheburara-3]
 -nameserver 127.0.0.53
 -options edns0 trust-ad
 -search openstacklocal
-+nameserver 192.168.42.128
-+nameserver 192.168.42.193
++nameserver 192.168.43.197
++nameserver 192.168.43.24
 
 changed: [cheburara-2]
 --- before: /etc/resolv.conf
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpaupsal0f/resolv.cnf.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmp9hf6rjls/resolv.cnf.j2
 @@ -1,19 +1,4 @@
 -# This file is managed by man:systemd-resolved(8). Do not edit.
 -#
@@ -643,8 +643,8 @@ changed: [cheburara-2]
 -nameserver 127.0.0.53
 -options edns0 trust-ad
 -search openstacklocal
-+nameserver 192.168.42.128
-+nameserver 192.168.42.193
++nameserver 192.168.43.197
++nameserver 192.168.43.24
 
 changed: [cheburara-1]
 
@@ -672,7 +672,7 @@ The following NEW packages will be installed:
   mecab-utils mysql-client-8.0 mysql-client-core-8.0 mysql-common mysql-server
   mysql-server-8.0 mysql-server-core-8.0
 0 upgraded, 24 newly installed, 0 to remove and 262 not upgraded.
-changed: [cheburara-2]
+changed: [cheburara-1]
 The following additional packages will be installed:
   libcgi-fast-perl libcgi-pm-perl libencode-locale-perl libevent-core-2.1-7
   libevent-pthreads-2.1-7 libfcgi-perl libhtml-parser-perl libhtml-tagset-perl
@@ -690,7 +690,7 @@ The following NEW packages will be installed:
   mecab-utils mysql-client-8.0 mysql-client-core-8.0 mysql-common mysql-server
   mysql-server-8.0 mysql-server-core-8.0
 0 upgraded, 24 newly installed, 0 to remove and 262 not upgraded.
-changed: [cheburara-1]
+changed: [cheburara-2]
 
 TASK [mysql : Install PyMySQL package] *****************************************
 Suggested packages:
@@ -708,7 +708,7 @@ changed: [cheburara-1]
 
 TASK [mysql : Create override.cnf file] ****************************************
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmprmrsj8rp/mysql_override.cnf.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpfnswn2u4/mysql_override.cnf.j2
 @@ -0,0 +1,8 @@
 +[mysqld]
 +bind-address = 0.0.0.0
@@ -717,11 +717,11 @@ TASK [mysql : Create override.cnf file] ****************************************
 +log-bin = /var/log/mysql/mysql-bin.log
 +relay-log = /var/log/mysql/mysql-relay.log
 +replicate-do-db = agama
-+server-id = 193
++server-id = 280
 
 changed: [cheburara-2]
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmp9hd7wqoi/mysql_override.cnf.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpij82ydh0/mysql_override.cnf.j2
 @@ -0,0 +1,8 @@
 +[mysqld]
 +bind-address = 0.0.0.0
@@ -730,9 +730,13 @@ changed: [cheburara-2]
 +log-bin = /var/log/mysql/mysql-bin.log
 +relay-log = /var/log/mysql/mysql-relay.log
 +replicate-do-db = agama
-+server-id = 128
++server-id = 453
 
 changed: [cheburara-1]
+
+TASK [mysql : Ensure mysql service is started and enabled] *********************
+ok: [cheburara-2]
+ok: [cheburara-1]
 
 TASK [mysql : MySQL database] **************************************************
 changed: [cheburara-1]
@@ -788,8 +792,8 @@ changed: [cheburara-2]
 changed: [cheburara-1]
 
 TASK [mysql : Ensure Exporter Restarts] ****************************************
-changed: [cheburara-2]
 changed: [cheburara-1]
+changed: [cheburara-2]
 
 TASK [mysql : Ensure mysql service is started and enabled] *********************
 ok: [cheburara-2]
@@ -826,8 +830,8 @@ changed: [cheburara-2]
 changed: [cheburara-1]
 
 TASK [mysql : Create MySQL user 'backup' with privileges] **********************
-changed: [cheburara-2]
 changed: [cheburara-1]
+changed: [cheburara-2]
 
 TASK [mysql : Create MySQL client configuration file for user 'backup'] ********
 changed: [cheburara-2]
@@ -835,14 +839,14 @@ changed: [cheburara-1]
 
 TASK [mysql : Create Cron file] ************************************************
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpidpdw3rr/mysql_backup_cron.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmps09_o3q9/mysql_backup_cron.j2
 @@ -0,0 +1,2 @@
 +0 16 * * * backup mysqldump agama > /home/backup/mysql/agama.sql && duplicity --no-encryption full /home/backup/mysql/ rsync://Cheburara@backup.chebariss.io/mysql
 +0 16 * * 1-6 backup mysqldump agama > /home/backup/mysql/agama.sql && duplicity --no-encryption incremental /home/backup/mysql/ rsync://Cheburara@backup.chebariss.io/mysql
 
 changed: [cheburara-2]
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpi7wbtmxm/mysql_backup_cron.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmp56asxqs5/mysql_backup_cron.j2
 @@ -0,0 +1 @@
 +
 
@@ -903,7 +907,7 @@ changed: [cheburara-3]
 
 TASK [nginx : Copy custom Nginx default configuration] *************************
 --- before: /etc/nginx/sites-enabled/default
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpgut564_p/default.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpm4cudps4/default.j2
 @@ -1,91 +1,27 @@
 -##
 -# You should look at the following URL's in order to grasp a solid understanding
@@ -1056,7 +1060,7 @@ ok: [cheburara-3]
 
 TASK [prometheus : Configure Prometheus] ***************************************
 --- before: /etc/prometheus/prometheus.yml
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmptvc4s994/prometheus.yml.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmphgqa3mpm/prometheus.yml.j2
 @@ -1,44 +1,51 @@
 -# Sample config for Prometheus.
 +global:
@@ -1151,7 +1155,7 @@ changed: [cheburara-3]
 
 TASK [prometheus : Configure Prometheus] ***************************************
 --- before: /etc/default/prometheus
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpepdi1k4y/prometheus.default.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpzsniaemz/prometheus.default.j2
 @@ -1,57 +1 @@
 -# Set the command-line arguments to pass to the server.
 -ARGS=""
@@ -4310,665 +4314,949 @@ changed: [cheburara-3] => (item={'src': 'mysql.json', 'dest': '/opt/grafana/prov
 changed: [cheburara-3] => (item={'src': 'haproxy_keepalived.json', 'dest': '/opt/grafana/provisioning/dashboards/haproxy_keepalived.json'})
 --- before
 +++ after: /home/cheba/ica0002/roles/grafana/files/status.json
-@@ -0,0 +1,658 @@
+@@ -0,0 +1,942 @@
 +{
-+    "annotations": {
-+      "list": [
-+        {
-+          "builtIn": 1,
-+          "datasource": {
-+            "type": "grafana",
-+            "uid": "-- Grafana --"
-+          },
-+          "enable": true,
-+          "hide": true,
-+          "iconColor": "rgba(0, 211, 255, 1)",
-+          "name": "Annotations & Alerts",
-+          "type": "dashboard"
-+        }
-+      ]
-+    },
-+    "editable": true,
-+    "fiscalYearStartMonth": 0,
-+    "graphTooltip": 0,
-+    "id": 5,
-+    "links": [],
-+    "liveNow": false,
-+    "panels": [
++  "annotations": {
++    "list": [
 +      {
++        "builtIn": 1,
 +        "datasource": {
-+          "type": "prometheus",
-+          "uid": "PBFA97CFB590B2093"
++          "type": "grafana",
++          "uid": "-- Grafana --"
 +        },
-+        "fieldConfig": {
-+          "defaults": {
-+            "mappings": [
-+              {
-+                "options": {
-+                  "0": {
-+                    "color": "red",
-+                    "index": 1,
-+                    "text": "DOWN"
-+                  },
-+                  "1": {
-+                    "color": "green",
-+                    "index": 0,
-+                    "text": "UP"
-+                  }
-+                },
-+                "type": "value"
-+              }
-+            ],
-+            "thresholds": {
-+              "mode": "absolute",
-+              "steps": [
-+                {
-+                  "color": "green",
-+                  "value": null
-+                },
-+                {
-+                  "color": "red",
-+                  "value": 80
-+                }
-+              ]
-+            },
-+            "unit": "short"
-+          },
-+          "overrides": []
-+        },
-+        "gridPos": {
-+          "h": 7,
-+          "w": 7,
-+          "x": 0,
-+          "y": 0
-+        },
-+        "id": 7,
-+        "options": {
-+          "colorMode": "background",
-+          "graphMode": "none",
-+          "justifyMode": "center",
-+          "orientation": "auto",
-+          "reduceOptions": {
-+            "calcs": [
-+              "lastNotNull"
-+            ],
-+            "fields": "",
-+            "values": false
-+          },
-+          "textMode": "auto",
-+          "wideLayout": true
-+        },
-+        "pluginVersion": "10.2.2",
-+        "targets": [
-+          {
-+            "datasource": {
-+              "type": "prometheus",
-+              "uid": "PBFA97CFB590B2093"
-+            },
-+            "disableTextWrap": false,
-+            "editorMode": "builder",
-+            "expr": "haproxy_up",
-+            "fullMetaSearch": false,
-+            "includeNullMetadata": true,
-+            "instant": false,
-+            "legendFormat": "__auto",
-+            "range": true,
-+            "refId": "A",
-+            "useBackend": false
-+          }
-+        ],
-+        "title": "HAPROXY service status",
-+        "type": "stat"
-+      },
-+      {
-+        "datasource": {
-+          "type": "prometheus",
-+          "uid": "PBFA97CFB590B2093"
-+        },
-+        "fieldConfig": {
-+          "defaults": {
-+            "mappings": [
-+              {
-+                "options": {
-+                  "0": {
-+                    "color": "red",
-+                    "index": 0,
-+                    "text": "DOWN"
-+                  },
-+                  "1": {
-+                    "color": "green",
-+                    "index": 1,
-+                    "text": "SLAVE"
-+                  },
-+                  "2": {
-+                    "color": "dark-green",
-+                    "index": 2,
-+                    "text": "MASTER"
-+                  }
-+                },
-+                "type": "value"
-+              }
-+            ],
-+            "thresholds": {
-+              "mode": "absolute",
-+              "steps": [
-+                {
-+                  "color": "green",
-+                  "value": null
-+                },
-+                {
-+                  "color": "red",
-+                  "value": 80
-+                }
-+              ]
-+            },
-+            "unit": "short"
-+          },
-+          "overrides": []
-+        },
-+        "gridPos": {
-+          "h": 7,
-+          "w": 8,
-+          "x": 7,
-+          "y": 0
-+        },
-+        "id": 5,
-+        "options": {
-+          "colorMode": "background",
-+          "graphMode": "none",
-+          "justifyMode": "auto",
-+          "orientation": "auto",
-+          "reduceOptions": {
-+            "calcs": [
-+              "lastNotNull"
-+            ],
-+            "fields": "",
-+            "values": false
-+          },
-+          "textMode": "auto",
-+          "wideLayout": true
-+        },
-+        "pluginVersion": "10.2.2",
-+        "targets": [
-+          {
-+            "datasource": {
-+              "type": "prometheus",
-+              "uid": "PBFA97CFB590B2093"
-+            },
-+            "disableTextWrap": false,
-+            "editorMode": "builder",
-+            "expr": "keepalived_vrrp_state",
-+            "fullMetaSearch": false,
-+            "includeNullMetadata": true,
-+            "instant": false,
-+            "legendFormat": "__auto",
-+            "range": true,
-+            "refId": "A",
-+            "useBackend": false
-+          }
-+        ],
-+        "title": "Keepalived VRRP State",
-+        "type": "stat"
-+      },
-+      {
-+        "datasource": {
-+          "type": "prometheus",
-+          "uid": "PBFA97CFB590B2093"
-+        },
-+        "fieldConfig": {
-+          "defaults": {
-+            "mappings": [
-+              {
-+                "options": {
-+                  "0": {
-+                    "color": "red",
-+                    "index": 1,
-+                    "text": "DOWN"
-+                  },
-+                  "1": {
-+                    "color": "green",
-+                    "index": 0,
-+                    "text": "UP"
-+                  },
-+                  "2": {
-+                    "color": "dark-green",
-+                    "index": 2,
-+                    "text": "MASTER"
-+                  }
-+                },
-+                "type": "value"
-+              }
-+            ],
-+            "thresholds": {
-+              "mode": "absolute",
-+              "steps": [
-+                {
-+                  "color": "green",
-+                  "value": null
-+                },
-+                {
-+                  "color": "red",
-+                  "value": 80
-+                }
-+              ]
-+            },
-+            "unit": "short"
-+          },
-+          "overrides": []
-+        },
-+        "gridPos": {
-+          "h": 7,
-+          "w": 9,
-+          "x": 15,
-+          "y": 0
-+        },
-+        "id": 2,
-+        "options": {
-+          "colorMode": "background",
-+          "graphMode": "none",
-+          "justifyMode": "auto",
-+          "orientation": "auto",
-+          "reduceOptions": {
-+            "calcs": [
-+              "lastNotNull"
-+            ],
-+            "fields": "",
-+            "values": false
-+          },
-+          "textMode": "auto",
-+          "wideLayout": true
-+        },
-+        "pluginVersion": "10.2.2",
-+        "targets": [
-+          {
-+            "datasource": {
-+              "type": "prometheus",
-+              "uid": "PBFA97CFB590B2093"
-+            },
-+            "editorMode": "code",
-+            "exemplar": true,
-+            "expr": "bind_up",
-+            "interval": "",
-+            "legendFormat": "{{instance}}",
-+            "range": true,
-+            "refId": "A"
-+          }
-+        ],
-+        "title": "Bind9 server status",
-+        "type": "stat"
-+      },
-+      {
-+        "datasource": {
-+          "type": "prometheus",
-+          "uid": "PBFA97CFB590B2093"
-+        },
-+        "fieldConfig": {
-+          "defaults": {
-+            "mappings": [
-+              {
-+                "options": {
-+                  "0": {
-+                    "color": "red",
-+                    "index": 1,
-+                    "text": "DOWN"
-+                  },
-+                  "1": {
-+                    "color": "green",
-+                    "index": 0,
-+                    "text": "UP"
-+                  }
-+                },
-+                "type": "value"
-+              }
-+            ],
-+            "thresholds": {
-+              "mode": "absolute",
-+              "steps": [
-+                {
-+                  "color": "green",
-+                  "value": null
-+                },
-+                {
-+                  "color": "red",
-+                  "value": 80
-+                }
-+              ]
-+            },
-+            "unit": "short"
-+          },
-+          "overrides": []
-+        },
-+        "gridPos": {
-+          "h": 7,
-+          "w": 7,
-+          "x": 0,
-+          "y": 7
-+        },
-+        "id": 1,
-+        "options": {
-+          "colorMode": "background",
-+          "graphMode": "none",
-+          "justifyMode": "center",
-+          "orientation": "auto",
-+          "reduceOptions": {
-+            "calcs": [
-+              "lastNotNull"
-+            ],
-+            "fields": "",
-+            "values": false
-+          },
-+          "textMode": "auto",
-+          "wideLayout": true
-+        },
-+        "pluginVersion": "10.2.2",
-+        "targets": [
-+          {
-+            "datasource": {
-+              "type": "prometheus",
-+              "uid": "PBFA97CFB590B2093"
-+            },
-+            "disableTextWrap": false,
-+            "editorMode": "builder",
-+            "expr": "mysql_up{instance=\"cheburara-1:9104\"}",
-+            "fullMetaSearch": false,
-+            "includeNullMetadata": true,
-+            "instant": false,
-+            "legendFormat": "__auto",
-+            "range": true,
-+            "refId": "A",
-+            "useBackend": false
-+          },
-+          {
-+            "datasource": {
-+              "type": "prometheus",
-+              "uid": "PBFA97CFB590B2093"
-+            },
-+            "disableTextWrap": false,
-+            "editorMode": "builder",
-+            "expr": "mysql_up{instance=\"cheburara-2:9104\"}",
-+            "fullMetaSearch": false,
-+            "hide": false,
-+            "includeNullMetadata": true,
-+            "instant": false,
-+            "legendFormat": "__auto",
-+            "range": true,
-+            "refId": "B",
-+            "useBackend": false
-+          }
-+        ],
-+        "title": "Mysql service status",
-+        "type": "stat"
-+      },
-+      {
-+        "datasource": {
-+          "type": "prometheus",
-+          "uid": "PBFA97CFB590B2093"
-+        },
-+        "fieldConfig": {
-+          "defaults": {
-+            "mappings": [
-+              {
-+                "options": {
-+                  "0": {
-+                    "color": "red",
-+                    "index": 1,
-+                    "text": "DOWN"
-+                  },
-+                  "1": {
-+                    "color": "green",
-+                    "index": 0,
-+                    "text": "UP"
-+                  }
-+                },
-+                "type": "value"
-+              }
-+            ],
-+            "thresholds": {
-+              "mode": "absolute",
-+              "steps": [
-+                {
-+                  "color": "green",
-+                  "value": null
-+                },
-+                {
-+                  "color": "red",
-+                  "value": 80
-+                }
-+              ]
-+            },
-+            "unit": "short"
-+          },
-+          "overrides": []
-+        },
-+        "gridPos": {
-+          "h": 7,
-+          "w": 11,
-+          "x": 7,
-+          "y": 7
-+        },
-+        "id": 8,
-+        "options": {
-+          "colorMode": "background",
-+          "graphMode": "none",
-+          "justifyMode": "center",
-+          "orientation": "auto",
-+          "reduceOptions": {
-+            "calcs": [
-+              "lastNotNull"
-+            ],
-+            "fields": "",
-+            "values": false
-+          },
-+          "textMode": "auto",
-+          "wideLayout": true
-+        },
-+        "pluginVersion": "10.2.2",
-+        "targets": [
-+          {
-+            "datasource": {
-+              "type": "prometheus",
-+              "uid": "PBFA97CFB590B2093"
-+            },
-+            "disableTextWrap": false,
-+            "editorMode": "builder",
-+            "expr": "haproxy_server_up",
-+            "fullMetaSearch": false,
-+            "includeNullMetadata": true,
-+            "instant": false,
-+            "legendFormat": "__auto",
-+            "range": true,
-+            "refId": "A",
-+            "useBackend": false
-+          }
-+        ],
-+        "title": "Haproxy server status",
-+        "type": "stat"
-+      },
-+      {
-+        "datasource": {
-+          "type": "prometheus",
-+          "uid": "PBFA97CFB590B2093"
-+        },
-+        "fieldConfig": {
-+          "defaults": {
-+            "mappings": [
-+              {
-+                "options": {
-+                  "0": {
-+                    "color": "red",
-+                    "index": 1,
-+                    "text": "DOWN"
-+                  },
-+                  "1": {
-+                    "color": "green",
-+                    "index": 0,
-+                    "text": "UP"
-+                  }
-+                },
-+                "type": "value"
-+              }
-+            ],
-+            "thresholds": {
-+              "mode": "absolute",
-+              "steps": [
-+                {
-+                  "color": "green",
-+                  "value": null
-+                },
-+                {
-+                  "color": "red",
-+                  "value": 80
-+                }
-+              ]
-+            },
-+            "unit": "short"
-+          },
-+          "overrides": []
-+        },
-+        "gridPos": {
-+          "h": 7,
-+          "w": 2,
-+          "x": 18,
-+          "y": 7
-+        },
-+        "id": 9,
-+        "options": {
-+          "colorMode": "background",
-+          "graphMode": "none",
-+          "justifyMode": "auto",
-+          "orientation": "auto",
-+          "reduceOptions": {
-+            "calcs": [
-+              "lastNotNull"
-+            ],
-+            "fields": "",
-+            "values": false
-+          },
-+          "textMode": "auto",
-+          "wideLayout": true
-+        },
-+        "pluginVersion": "10.2.2",
-+        "targets": [
-+          {
-+            "datasource": {
-+              "type": "prometheus",
-+              "uid": "PBFA97CFB590B2093"
-+            },
-+            "disableTextWrap": false,
-+            "editorMode": "builder",
-+            "expr": "influxdb_exporter_stats_query_success",
-+            "fullMetaSearch": false,
-+            "includeNullMetadata": true,
-+            "instant": false,
-+            "legendFormat": "__auto",
-+            "range": true,
-+            "refId": "A",
-+            "useBackend": false
-+          }
-+        ],
-+        "title": "InfluxDB status",
-+        "type": "stat"
-+      },
-+      {
-+        "datasource": {
-+          "type": "prometheus",
-+          "uid": "PBFA97CFB590B2093"
-+        },
-+        "fieldConfig": {
-+          "defaults": {
-+            "mappings": [
-+              {
-+                "options": {
-+                  "0": {
-+                    "color": "red",
-+                    "index": 1,
-+                    "text": "DOWN"
-+                  },
-+                  "1": {
-+                    "color": "green",
-+                    "index": 0,
-+                    "text": "UP"
-+                  }
-+                },
-+                "type": "value"
-+              }
-+            ],
-+            "thresholds": {
-+              "mode": "absolute",
-+              "steps": [
-+                {
-+                  "color": "green",
-+                  "value": null
-+                },
-+                {
-+                  "color": "red",
-+                  "value": 80
-+                }
-+              ]
-+            },
-+            "unit": "short"
-+          },
-+          "overrides": []
-+        },
-+        "gridPos": {
-+          "h": 7,
-+          "w": 4,
-+          "x": 20,
-+          "y": 7
-+        },
-+        "id": 4,
-+        "options": {
-+          "colorMode": "background",
-+          "graphMode": "none",
-+          "justifyMode": "center",
-+          "orientation": "auto",
-+          "reduceOptions": {
-+            "calcs": [
-+              "lastNotNull"
-+            ],
-+            "fields": "",
-+            "values": false
-+          },
-+          "textMode": "auto",
-+          "wideLayout": true
-+        },
-+        "pluginVersion": "10.2.2",
-+        "targets": [
-+          {
-+            "datasource": {
-+              "type": "prometheus",
-+              "uid": "PBFA97CFB590B2093"
-+            },
-+            "editorMode": "code",
-+            "exemplar": true,
-+            "expr": "nginx_up",
-+            "interval": "",
-+            "legendFormat": "{{instance}}",
-+            "range": true,
-+            "refId": "A"
-+          }
-+        ],
-+        "title": "Nginx server status",
-+        "type": "stat"
++        "enable": true,
++        "hide": true,
++        "iconColor": "rgba(0, 211, 255, 1)",
++        "name": "Annotations & Alerts",
++        "type": "dashboard"
 +      }
-+    ],
-+    "refresh": "",
-+    "schemaVersion": 38,
-+    "tags": [],
-+    "templating": {
-+      "list": []
++    ]
++  },
++  "editable": true,
++  "fiscalYearStartMonth": 0,
++  "graphTooltip": 0,
++  "id": 2,
++  "links": [
++    {
++      "asDropdown": false,
++      "icon": "external link",
++      "includeVars": false,
++      "keepTime": false,
++      "tags": [],
++      "targetBlank": false,
++      "title": "Main",
++      "tooltip": "",
++      "type": "dashboards",
++      "url": ""
++    }
++  ],
++  "liveNow": false,
++  "panels": [
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "PBFA97CFB590B2093"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "red",
++                  "index": 1,
++                  "text": "DOWN"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 0,
++                  "text": "UP"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          },
++          "unit": "short"
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 7,
++        "w": 7,
++        "x": 0,
++        "y": 0
++      },
++      "id": 7,
++      "options": {
++        "colorMode": "background",
++        "graphMode": "none",
++        "justifyMode": "center",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "pluginVersion": "10.2.3",
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "PBFA97CFB590B2093"
++          },
++          "disableTextWrap": false,
++          "editorMode": "builder",
++          "expr": "haproxy_up",
++          "fullMetaSearch": false,
++          "includeNullMetadata": true,
++          "instant": false,
++          "legendFormat": "__auto",
++          "range": true,
++          "refId": "A",
++          "useBackend": false
++        }
++      ],
++      "title": "HAPROXY service status",
++      "type": "stat"
 +    },
-+    "time": {
-+      "from": "now-6h",
-+      "to": "now"
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "PBFA97CFB590B2093"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "red",
++                  "index": 0,
++                  "text": "DOWN"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 1,
++                  "text": "SLAVE"
++                },
++                "2": {
++                  "color": "dark-green",
++                  "index": 2,
++                  "text": "MASTER"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          },
++          "unit": "short"
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 7,
++        "w": 8,
++        "x": 7,
++        "y": 0
++      },
++      "id": 5,
++      "options": {
++        "colorMode": "background",
++        "graphMode": "none",
++        "justifyMode": "auto",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "pluginVersion": "10.2.3",
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "PBFA97CFB590B2093"
++          },
++          "disableTextWrap": false,
++          "editorMode": "builder",
++          "expr": "keepalived_vrrp_state",
++          "fullMetaSearch": false,
++          "includeNullMetadata": true,
++          "instant": false,
++          "legendFormat": "__auto",
++          "range": true,
++          "refId": "A",
++          "useBackend": false
++        }
++      ],
++      "title": "Keepalived VRRP State",
++      "type": "stat"
 +    },
-+    "timepicker": {},
-+    "timezone": "",
-+    "title": "Status",
-+    "uid": "a87073f4-3bc3-42f9-803c-155c71d89dc9",
-+    "version": 1,
-+    "weekStart": ""
-+  }
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "PBFA97CFB590B2093"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "red",
++                  "index": 1,
++                  "text": "DOWN"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 0,
++                  "text": "UP"
++                },
++                "2": {
++                  "color": "dark-green",
++                  "index": 2,
++                  "text": "MASTER"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          },
++          "unit": "short"
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 7,
++        "w": 9,
++        "x": 15,
++        "y": 0
++      },
++      "id": 2,
++      "options": {
++        "colorMode": "background",
++        "graphMode": "none",
++        "justifyMode": "auto",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "pluginVersion": "10.2.3",
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "PBFA97CFB590B2093"
++          },
++          "editorMode": "code",
++          "exemplar": true,
++          "expr": "bind_up",
++          "interval": "",
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "Bind9 server status",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "PBFA97CFB590B2093"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "red",
++                  "index": 1,
++                  "text": "DOWN"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 0,
++                  "text": "UP"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          },
++          "unit": "short"
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 7,
++        "w": 7,
++        "x": 0,
++        "y": 7
++      },
++      "id": 1,
++      "options": {
++        "colorMode": "background",
++        "graphMode": "none",
++        "justifyMode": "center",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "pluginVersion": "10.2.3",
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "PBFA97CFB590B2093"
++          },
++          "disableTextWrap": false,
++          "editorMode": "builder",
++          "expr": "mysql_up{instance=\"cheburara-1:9104\"}",
++          "fullMetaSearch": false,
++          "includeNullMetadata": true,
++          "instant": false,
++          "legendFormat": "__auto",
++          "range": true,
++          "refId": "A",
++          "useBackend": false
++        },
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "PBFA97CFB590B2093"
++          },
++          "disableTextWrap": false,
++          "editorMode": "builder",
++          "expr": "mysql_up{instance=\"cheburara-2:9104\"}",
++          "fullMetaSearch": false,
++          "hide": false,
++          "includeNullMetadata": true,
++          "instant": false,
++          "legendFormat": "__auto",
++          "range": true,
++          "refId": "B",
++          "useBackend": false
++        }
++      ],
++      "title": "Mysql service status",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "PBFA97CFB590B2093"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "red",
++                  "index": 1,
++                  "text": "DOWN"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 0,
++                  "text": "UP"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          },
++          "unit": "short"
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 7,
++        "w": 11,
++        "x": 7,
++        "y": 7
++      },
++      "id": 8,
++      "options": {
++        "colorMode": "background",
++        "graphMode": "none",
++        "justifyMode": "center",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "pluginVersion": "10.2.3",
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "PBFA97CFB590B2093"
++          },
++          "disableTextWrap": false,
++          "editorMode": "builder",
++          "expr": "haproxy_server_up",
++          "fullMetaSearch": false,
++          "includeNullMetadata": true,
++          "instant": false,
++          "legendFormat": "__auto",
++          "range": true,
++          "refId": "A",
++          "useBackend": false
++        }
++      ],
++      "title": "Haproxy server status",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "PBFA97CFB590B2093"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "red",
++                  "index": 1,
++                  "text": "DOWN"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 0,
++                  "text": "UP"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          },
++          "unit": "short"
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 7,
++        "w": 2,
++        "x": 18,
++        "y": 7
++      },
++      "id": 9,
++      "options": {
++        "colorMode": "background",
++        "graphMode": "none",
++        "justifyMode": "auto",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "pluginVersion": "10.2.3",
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "PBFA97CFB590B2093"
++          },
++          "disableTextWrap": false,
++          "editorMode": "builder",
++          "expr": "influxdb_exporter_stats_query_success",
++          "fullMetaSearch": false,
++          "includeNullMetadata": true,
++          "instant": false,
++          "legendFormat": "__auto",
++          "range": true,
++          "refId": "A",
++          "useBackend": false
++        }
++      ],
++      "title": "InfluxDB status",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "PBFA97CFB590B2093"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "red",
++                  "index": 1,
++                  "text": "DOWN"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 0,
++                  "text": "UP"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          },
++          "unit": "short"
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 7,
++        "w": 4,
++        "x": 20,
++        "y": 7
++      },
++      "id": 4,
++      "options": {
++        "colorMode": "background",
++        "graphMode": "none",
++        "justifyMode": "center",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "pluginVersion": "10.2.3",
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "PBFA97CFB590B2093"
++          },
++          "editorMode": "code",
++          "exemplar": true,
++          "expr": "nginx_up",
++          "interval": "",
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "Nginx server status",
++      "type": "stat"
++    },
++    {
++      "aliasColors": {},
++      "bars": false,
++      "dashLength": 10,
++      "dashes": false,
++      "datasource": {
++        "type": "influxdb",
++        "uid": "P3168EDBD1FFBB4A6"
++      },
++      "fill": 1,
++      "fillGradient": 0,
++      "gridPos": {
++        "h": 7,
++        "w": 8,
++        "x": 0,
++        "y": 14
++      },
++      "hiddenSeries": false,
++      "id": 10,
++      "legend": {
++        "avg": false,
++        "current": false,
++        "max": false,
++        "min": false,
++        "show": true,
++        "total": false,
++        "values": false
++      },
++      "lines": true,
++      "linewidth": 1,
++      "nullPointMode": "null",
++      "options": {
++        "alertThreshold": true
++      },
++      "percentage": false,
++      "pluginVersion": "10.2.3",
++      "pointradius": 2,
++      "points": false,
++      "renderer": "flot",
++      "seriesOverrides": [],
++      "spaceLength": 10,
++      "stack": false,
++      "steppedLine": false,
++      "targets": [
++        {
++          "datasource": {
++            "type": "influxdb",
++            "uid": "P3168EDBD1FFBB4A6"
++          },
++          "groupBy": [
++            {
++              "params": [
++                "$__interval"
++              ],
++              "type": "time"
++            },
++            {
++              "params": [
++                "null"
++              ],
++              "type": "fill"
++            }
++          ],
++          "measurement": "rtt",
++          "orderByTime": "ASC",
++          "policy": "default",
++          "refId": "A",
++          "resultFormat": "time_series",
++          "select": [
++            [
++              {
++                "params": [
++                  "rtt"
++                ],
++                "type": "field"
++              },
++              {
++                "params": [],
++                "type": "mean"
++              }
++            ]
++          ],
++          "tags": [
++            {
++              "key": "dst::tag",
++              "operator": "=",
++              "value": "youtube.com"
++            }
++          ]
++        }
++      ],
++      "thresholds": [],
++      "timeRegions": [],
++      "title": "Latency Monitoring",
++      "tooltip": {
++        "shared": true,
++        "sort": 0,
++        "value_type": "individual"
++      },
++      "type": "graph",
++      "xaxis": {
++        "mode": "time",
++        "show": true,
++        "values": []
++      },
++      "yaxes": [
++        {
++          "show": true
++        },
++        {
++          "show": true
++        }
++      ],
++      "yaxis": {
++        "align": false
++      }
++    },
++    {
++      "aliasColors": {},
++      "bars": false,
++      "dashLength": 10,
++      "dashes": false,
++      "datasource": {
++        "type": "prometheus"
++      },
++      "fill": 1,
++      "fillGradient": 0,
++      "gridPos": {
++        "h": 7,
++        "w": 8,
++        "x": 8,
++        "y": 14
++      },
++      "hiddenSeries": false,
++      "id": 11,
++      "legend": {
++        "avg": false,
++        "current": false,
++        "max": false,
++        "min": false,
++        "show": true,
++        "total": false,
++        "values": false
++      },
++      "lines": true,
++      "linewidth": 1,
++      "nullPointMode": "null",
++      "options": {
++        "alertThreshold": true
++      },
++      "percentage": false,
++      "pluginVersion": "10.2.3",
++      "pointradius": 2,
++      "points": false,
++      "renderer": "flot",
++      "seriesOverrides": [],
++      "spaceLength": 10,
++      "stack": false,
++      "steppedLine": false,
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus"
++          },
++          "expr": "rate(bind_resolver_queries_total{type=\"A\"}[1m])",
++          "refId": "A"
++        }
++      ],
++      "thresholds": [],
++      "timeRegions": [],
++      "title": "Bind9 Status + DNS Queries",
++      "tooltip": {
++        "shared": true,
++        "sort": 0,
++        "value_type": "individual"
++      },
++      "type": "graph",
++      "xaxis": {
++        "mode": "time",
++        "show": true,
++        "values": []
++      },
++      "yaxes": [
++        {
++          "show": true
++        },
++        {
++          "show": true
++        }
++      ],
++      "yaxis": {
++        "align": false
++      }
++    },
++    {
++      "aliasColors": {},
++      "bars": false,
++      "dashLength": 10,
++      "dashes": false,
++      "datasource": {
++        "type": "prometheus"
++      },
++      "fill": 1,
++      "fillGradient": 0,
++      "gridPos": {
++        "h": 7,
++        "w": 8,
++        "x": 16,
++        "y": 14
++      },
++      "hiddenSeries": false,
++      "id": 12,
++      "legend": {
++        "avg": false,
++        "current": false,
++        "max": false,
++        "min": false,
++        "show": true,
++        "total": false,
++        "values": false
++      },
++      "lines": true,
++      "linewidth": 1,
++      "nullPointMode": "null",
++      "options": {
++        "alertThreshold": true
++      },
++      "percentage": false,
++      "pluginVersion": "10.2.3",
++      "pointradius": 2,
++      "points": false,
++      "renderer": "flot",
++      "seriesOverrides": [],
++      "spaceLength": 10,
++      "stack": false,
++      "steppedLine": false,
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus"
++          },
++          "expr": "rate(mysql_global_status_commands_total{command='select'}[1m])",
++          "refId": "A"
++        }
++      ],
++      "thresholds": [],
++      "timeRegions": [],
++      "title": "MySQL Status + Selects",
++      "tooltip": {
++        "shared": true,
++        "sort": 0,
++        "value_type": "individual"
++      },
++      "type": "graph",
++      "xaxis": {
++        "mode": "time",
++        "show": true,
++        "values": []
++      },
++      "yaxes": [
++        {
++          "show": true
++        },
++        {
++          "show": true
++        }
++      ],
++      "yaxis": {
++        "align": false
++      }
++    }
++  ],
++  "refresh": "auto",
++  "schemaVersion": 39,
++  "tags": [],
++  "templating": {
++    "list": []
++  },
++  "time": {
++    "from": "now-6h",
++    "to": "now"
++  },
++  "timepicker": {},
++  "timezone": "",
++  "title": "Status",
++  "uid": "a87073f4-3bc3-42f9-803c-155c71d89dc9",
++  "version": 4,
++  "weekStart": ""
++}
 
 changed: [cheburara-3] => (item={'src': 'status.json', 'dest': '/opt/grafana/provisioning/dashboards/status.json'})
 
@@ -5006,7 +5294,7 @@ changed: [cheburara-3]
 
 TASK [influxdb : Copy InfluxDB configuration file] *****************************
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpxdyqdi8u/influxdb.conf.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmp96a5i5xb/influxdb.conf.j2
 @@ -0,0 +1,6 @@
 +[http]
 +log-enabled = false
@@ -5053,7 +5341,7 @@ changed: [cheburara-3]
 
 TASK [influxdb : Create systemd service for InfluxDB Stats Exporter] ***********
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmptnezepaa/influxdb-stats-exporter.service.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmp61z49e55/influxdb-stats-exporter.service.j2
 @@ -0,0 +1,12 @@
 +[Unit]
 +Description=InfluxDB Stats Exporter
@@ -5091,7 +5379,7 @@ changed: [cheburara-3]
 
 TASK [influxdb : Create Cron tab file for InfluxDB backup] *********************
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmp7fxqc30t/influxdb_backup_cron.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpd7p823it/influxdb_backup_cron.j2
 @@ -0,0 +1,2 @@
 +0 13 * * * backup influxd backup -portable -database telegraf /home/backup/influxdb && duplicity --no-encryption full /home/backup/influxdb rsync://Cheburara@backup.chebariss.io/influxdb
 +# 0 13 * * 1-6 backup influxd backup -portable -database telegraf /home/backup/influxdb && duplicity --no-encryption incremental /home/backup/influxdb rsync://Cheburara@backup.chebariss.io/influxdb
@@ -5187,7 +5475,7 @@ changed: [cheburara-3]
 
 TASK [pinger : Copy the pinger.service unit file] ******************************
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmp4_4jy6gz/pinger.service.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpj4m3f071/pinger.service.j2
 @@ -0,0 +1,14 @@
 +[Unit]
 +Description=helpme
@@ -5215,8 +5503,8 @@ changed: [cheburara-3]
 PLAY [HAPoxy] ******************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [haproxy : Installation HAProxy] ******************************************
 The following additional packages will be installed:
@@ -5238,7 +5526,7 @@ changed: [cheburara-1]
 
 TASK [haproxy : HAProxy Configuration] *****************************************
 --- before: /etc/haproxy/haproxy.cfg
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpa9ddvimq/haproxy.conf.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmploqq5gcw/haproxy.conf.j2
 @@ -7,15 +7,6 @@
  	user haproxy
  	group haproxy
@@ -5279,7 +5567,7 @@ TASK [haproxy : HAProxy Configuration] *****************************************
 
 changed: [cheburara-2]
 --- before: /etc/haproxy/haproxy.cfg
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmp5brm5ghg/haproxy.conf.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmp9ngtu1at/haproxy.conf.j2
 @@ -7,15 +7,6 @@
  	user haproxy
  	group haproxy
@@ -5381,8 +5669,8 @@ The following NEW packages will be installed:
 changed: [cheburara-1]
 
 TASK [keepalived : Create keepalived_script user] ******************************
-changed: [cheburara-1]
 changed: [cheburara-2]
+changed: [cheburara-1]
 
 TASK [keepalived : Create home directory for keepalived_script user] ***********
 ok: [cheburara-2]
@@ -5390,14 +5678,14 @@ ok: [cheburara-1]
 
 TASK [keepalived : Create configuration for keepalived_script] *****************
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmp7niyp9lh/check_script.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpd1nihrfr/check_script.j2
 @@ -0,0 +1,2 @@
 +#!/bin/bash
 +ss -ntl | grep -q ':88 '
 
 changed: [cheburara-2]
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpdx4i3jo0/check_script.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpsv40aekf/check_script.j2
 @@ -0,0 +1,2 @@
 +#!/bin/bash
 +ss -ntl | grep -q ':88 '
@@ -5426,7 +5714,7 @@ changed: [cheburara-1]
 
 TASK [keepalived : Configuration of Keepalived Exporter] ***********************
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpplfys1v3/keepalived_exporters.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpdviyy70e/keepalived_exporters.j2
 @@ -0,0 +1,10 @@
 +[Unit]
 +Description=Keepalived Exporter
@@ -5441,7 +5729,7 @@ TASK [keepalived : Configuration of Keepalived Exporter] ***********************
 
 changed: [cheburara-2]
 --- before
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmp5s2yoh48/keepalived_exporters.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmp8vrtqvzl/keepalived_exporters.j2
 @@ -0,0 +1,10 @@
 +[Unit]
 +Description=Keepalived Exporter
@@ -5469,8 +5757,8 @@ changed: [cheburara-2]
 changed: [cheburara-1]
 
 RUNNING HANDLER [keepalived : restart keepalived] ******************************
-changed: [cheburara-2]
 changed: [cheburara-1]
+changed: [cheburara-2]
 
 RUNNING HANDLER [keepalived : Restart Keepalived Exporter] *********************
 changed: [cheburara-2]
@@ -5479,8 +5767,8 @@ changed: [cheburara-1]
 PLAY [Web Server] **************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [cheburara-1]
 ok: [cheburara-2]
+ok: [cheburara-1]
 
 TASK [docker : Install Docker packages] ****************************************
 The following additional packages will be installed:
@@ -5493,7 +5781,7 @@ The following NEW packages will be installed:
   bridge-utils containerd dnsmasq-base docker.io libidn11 pigz python3-docker
   python3-websocket runc ubuntu-fan
 0 upgraded, 10 newly installed, 0 to remove and 262 not upgraded.
-changed: [cheburara-2]
+changed: [cheburara-1]
 The following additional packages will be installed:
   bridge-utils containerd dnsmasq-base libidn11 pigz python3-websocket runc
   ubuntu-fan
@@ -5504,11 +5792,11 @@ The following NEW packages will be installed:
   bridge-utils containerd dnsmasq-base docker.io libidn11 pigz python3-docker
   python3-websocket runc ubuntu-fan
 0 upgraded, 10 newly installed, 0 to remove and 262 not upgraded.
-changed: [cheburara-1]
+changed: [cheburara-2]
 
 TASK [docker : Enable Docker service] ******************************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [agama : Create Agama directory] ******************************************
 --- before
@@ -5566,7 +5854,7 @@ The following NEW packages will be installed:
   libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream libtiff5
   libwebp6 libxpm4 nginx nginx-common nginx-core
 0 upgraded, 17 newly installed, 0 to remove and 262 not upgraded.
-changed: [cheburara-1]
+changed: [cheburara-2]
 The following additional packages will be installed:
   fontconfig-config fonts-dejavu-core libfontconfig1 libgd3 libjbig0
   libjpeg-turbo8 libjpeg8 libnginx-mod-http-image-filter
@@ -5580,126 +5868,11 @@ The following NEW packages will be installed:
   libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream libtiff5
   libwebp6 libxpm4 nginx nginx-common nginx-core
 0 upgraded, 17 newly installed, 0 to remove and 262 not upgraded.
-changed: [cheburara-2]
+changed: [cheburara-1]
 
 TASK [nginx : Copy custom Nginx default configuration] *************************
 --- before: /etc/nginx/sites-enabled/default
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmpxuvtrqis/default.j2
-@@ -1,91 +1,27 @@
--##
--# You should look at the following URL's in order to grasp a solid understanding
--# of Nginx configuration files in order to fully unleash the power of Nginx.
--# https://www.nginx.com/resources/wiki/start/
--# https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/
--# https://wiki.debian.org/Nginx/DirectoryStructure
--#
--# In most cases, administrators will remove this file from sites-enabled/ and
--# leave it as reference inside of sites-available where it will continue to be
--# updated by the nginx packaging team.
--#
--# This file will automatically load configuration files provided by other
--# applications, such as Drupal or Wordpress. These applications will be made
--# available underneath a path with that package name, such as /drupal8.
--#
--# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
--##
- 
--# Default server configuration
--#
- server {
--	listen 80 default_server;
--	listen [::]:80 default_server;
-+    listen 80 default_server;
-+    server_name _;
- 
--	# SSL configuration
--	#
--	# listen 443 ssl default_server;
--	# listen [::]:443 ssl default_server;
--	#
--	# Note: You should disable gzip for SSL traffic.
--	# See: https://bugs.debian.org/773332
--	#
--	# Read up on ssl_ciphers to ensure a secure configuration.
--	# See: https://bugs.debian.org/765782
--	#
--	# Self signed certs generated by the ssl-cert package
--	# Don't use them in a production server!
--	#
--	# include snippets/snakeoil.conf;
-+    location / {
-+        proxy_set_header Host $host;
-+        proxy_pass http://localhost:8001;
-+    }
- 
--	root /var/www/html;
-+    location /prometheus {
-+        proxy_pass http://localhost:9090;
-+    }
- 
--	# Add index.php to the list if you are using PHP
--	index index.html index.htm index.nginx-debian.html;
--
--	server_name _;
--
--	location / {
--		# First attempt to serve request as file, then
--		# as directory, then fall back to displaying a 404.
--		try_files $uri $uri/ =404;
--	}
--
--	# pass PHP scripts to FastCGI server
--	#
--	#location ~ \.php$ {
--	#	include snippets/fastcgi-php.conf;
--	#
--	#	# With php-fpm (or other unix sockets):
--	#	fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
--	#	# With php-cgi (or other tcp sockets):
--	#	fastcgi_pass 127.0.0.1:9000;
--	#}
--
--	# deny access to .htaccess files, if Apache's document root
--	# concurs with nginx's one
--	#
--	#location ~ /\.ht {
--	#	deny all;
--	#}
-+    location /grafana {
-+        proxy_set_header Host $http_host;
-+        proxy_pass http://localhost:3001;
-+    }
- }
- 
-+server {
-+    listen localhost:8080;
- 
--# Virtual Host configuration for example.com
--#
--# You can move that to a different file under sites-available/ and symlink that
--# to sites-enabled/ to enable it.
--#
--#server {
--#	listen 80;
--#	listen [::]:80;
--#
--#	server_name example.com;
--#
--#	root /var/www/example.com;
--#	index index.html;
--#
--#	location / {
--#		try_files $uri $uri/ =404;
--#	}
--#}
-+    location /stub_status {
-+        stub_status;
-+    }
-+}
-
-changed: [cheburara-2]
---- before: /etc/nginx/sites-enabled/default
-+++ after: /home/cheba/.ansible/tmp/ansible-local-5953d8fu22jb/tmp_kumxgty/default.j2
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpjci68ovr/default.j2
 @@ -1,91 +1,27 @@
 -##
 -# You should look at the following URL's in order to grasp a solid understanding
@@ -5813,6 +5986,121 @@ changed: [cheburara-2]
 +}
 
 changed: [cheburara-1]
+--- before: /etc/nginx/sites-enabled/default
++++ after: /home/cheba/.ansible/tmp/ansible-local-55437dbsu1kf/tmpzdbf4vpa/default.j2
+@@ -1,91 +1,27 @@
+-##
+-# You should look at the following URL's in order to grasp a solid understanding
+-# of Nginx configuration files in order to fully unleash the power of Nginx.
+-# https://www.nginx.com/resources/wiki/start/
+-# https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/
+-# https://wiki.debian.org/Nginx/DirectoryStructure
+-#
+-# In most cases, administrators will remove this file from sites-enabled/ and
+-# leave it as reference inside of sites-available where it will continue to be
+-# updated by the nginx packaging team.
+-#
+-# This file will automatically load configuration files provided by other
+-# applications, such as Drupal or Wordpress. These applications will be made
+-# available underneath a path with that package name, such as /drupal8.
+-#
+-# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+-##
+ 
+-# Default server configuration
+-#
+ server {
+-	listen 80 default_server;
+-	listen [::]:80 default_server;
++    listen 80 default_server;
++    server_name _;
+ 
+-	# SSL configuration
+-	#
+-	# listen 443 ssl default_server;
+-	# listen [::]:443 ssl default_server;
+-	#
+-	# Note: You should disable gzip for SSL traffic.
+-	# See: https://bugs.debian.org/773332
+-	#
+-	# Read up on ssl_ciphers to ensure a secure configuration.
+-	# See: https://bugs.debian.org/765782
+-	#
+-	# Self signed certs generated by the ssl-cert package
+-	# Don't use them in a production server!
+-	#
+-	# include snippets/snakeoil.conf;
++    location / {
++        proxy_set_header Host $host;
++        proxy_pass http://localhost:8001;
++    }
+ 
+-	root /var/www/html;
++    location /prometheus {
++        proxy_pass http://localhost:9090;
++    }
+ 
+-	# Add index.php to the list if you are using PHP
+-	index index.html index.htm index.nginx-debian.html;
+-
+-	server_name _;
+-
+-	location / {
+-		# First attempt to serve request as file, then
+-		# as directory, then fall back to displaying a 404.
+-		try_files $uri $uri/ =404;
+-	}
+-
+-	# pass PHP scripts to FastCGI server
+-	#
+-	#location ~ \.php$ {
+-	#	include snippets/fastcgi-php.conf;
+-	#
+-	#	# With php-fpm (or other unix sockets):
+-	#	fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+-	#	# With php-cgi (or other tcp sockets):
+-	#	fastcgi_pass 127.0.0.1:9000;
+-	#}
+-
+-	# deny access to .htaccess files, if Apache's document root
+-	# concurs with nginx's one
+-	#
+-	#location ~ /\.ht {
+-	#	deny all;
+-	#}
++    location /grafana {
++        proxy_set_header Host $http_host;
++        proxy_pass http://localhost:3001;
++    }
+ }
+ 
++server {
++    listen localhost:8080;
+ 
+-# Virtual Host configuration for example.com
+-#
+-# You can move that to a different file under sites-available/ and symlink that
+-# to sites-enabled/ to enable it.
+-#
+-#server {
+-#	listen 80;
+-#	listen [::]:80;
+-#
+-#	server_name example.com;
+-#
+-#	root /var/www/example.com;
+-#	index index.html;
+-#
+-#	location / {
+-#		try_files $uri $uri/ =404;
+-#	}
+-#}
++    location /stub_status {
++        stub_status;
++    }
++}
+
+changed: [cheburara-2]
 
 TASK [nginx : Start Nginx and enable it at boot] *******************************
 ok: [cheburara-2]
@@ -5825,11 +6113,11 @@ TASK [nginx : Install Nginx exporter from Ubuntu package repository] ***********
 The following NEW packages will be installed:
   prometheus-nginx-exporter
 0 upgraded, 1 newly installed, 0 to remove and 262 not upgraded.
-changed: [cheburara-2]
+changed: [cheburara-1]
 The following NEW packages will be installed:
   prometheus-nginx-exporter
 0 upgraded, 1 newly installed, 0 to remove and 262 not upgraded.
-changed: [cheburara-1]
+changed: [cheburara-2]
 
 TASK [nginx : Enable exporter service] *****************************************
 changed: [cheburara-2]
@@ -5844,8 +6132,8 @@ changed: [cheburara-2]
 changed: [cheburara-1]
 
 PLAY RECAP *********************************************************************
-cheburara-1                : ok=87   changed=67   unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
-cheburara-2                : ok=87   changed=67   unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+cheburara-1                : ok=88   changed=67   unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+cheburara-2                : ok=88   changed=67   unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
 cheburara-3                : ok=86   changed=66   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 [WARNING]: Collection community.general does not support Ansible version 2.10.8
@@ -5878,18 +6166,18 @@ ok: [cheburara-1]
 ok: [cheburara-3]
 
 TASK [init : Install rsyslog] **************************************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 ok: [cheburara-3]
 
 TASK [init : Create a custom rsyslog configuration file] ***********************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 ok: [cheburara-3]
 
 TASK [init : Modify a custom rsyslog configuration file] ***********************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 ok: [cheburara-3]
 
 TASK [init : Ensure the user 'backup' exists with a unique SSH key] ************
@@ -5936,8 +6224,8 @@ ok: [cheburara-3]
 
 TASK [bind : Create DNS Zone File if not existing] *****************************
 ok: [cheburara-2]
-ok: [cheburara-1]
 ok: [cheburara-3]
+ok: [cheburara-1]
 
 TASK [bind : Create DNS Reverse Zone File if not existing] *********************
 ok: [cheburara-2]
@@ -5970,8 +6258,8 @@ skipping: [cheburara-1] => (item=None)
 skipping: [cheburara-2] => (item=None) 
 skipping: [cheburara-2] => (item=None) 
 skipping: [cheburara-1] => (item=None) 
-skipping: [cheburara-1] => (item=None) 
 skipping: [cheburara-2] => (item=None) 
+skipping: [cheburara-1] => (item=None) 
 skipping: [cheburara-1] => (item=None) 
 skipping: [cheburara-1]
 skipping: [cheburara-2] => (item=None) 
@@ -6001,26 +6289,26 @@ TASK [bind : Include Exporter Tasks] *******************************************
 included: /home/cheba/ica0002/roles/bind/tasks/exporters/main.yaml for cheburara-3, cheburara-1, cheburara-2
 
 TASK [bind : Install Bind9 exporter from Ubuntu package repository] ************
-ok: [cheburara-3]
 ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-3]
 
 TASK [bind : Enable Bind9 exporter] ********************************************
-ok: [cheburara-3]
 ok: [cheburara-2]
+ok: [cheburara-3]
 ok: [cheburara-1]
 
 PLAY [Resolver] ****************************************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [cheburara-2]
-ok: [cheburara-3]
 ok: [cheburara-1]
+ok: [cheburara-3]
 
 TASK [resolver : Configure /etc/resolv.conf] ***********************************
 ok: [cheburara-2]
-ok: [cheburara-3]
 ok: [cheburara-1]
+ok: [cheburara-3]
 
 PLAY [Database server] *********************************************************
 
@@ -6033,16 +6321,20 @@ ok: [cheburara-2]
 ok: [cheburara-1]
 
 TASK [mysql : Install PyMySQL package] *****************************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [mysql : Create override.cnf file] ****************************************
 ok: [cheburara-2]
 ok: [cheburara-1]
 
-TASK [mysql : MySQL database] **************************************************
-ok: [cheburara-1]
+TASK [mysql : Ensure mysql service is started and enabled] *********************
 ok: [cheburara-2]
+ok: [cheburara-1]
+
+TASK [mysql : MySQL database] **************************************************
+ok: [cheburara-2]
+ok: [cheburara-1]
 
 TASK [mysql : MySQL user] ******************************************************
 ok: [cheburara-2]
@@ -6064,8 +6356,8 @@ ok: [cheburara-2]
 ok: [cheburara-1]
 
 TASK [mysql : Update Prometheus MySQL Exporter for Replication Metrics] ********
-ok: [cheburara-1]
 ok: [cheburara-2]
+ok: [cheburara-1]
 
 TASK [mysql : Ensure Exporter Restarts] ****************************************
 ok: [cheburara-2]
@@ -6263,8 +6555,8 @@ ok: [cheburara-3]
 PLAY [HAPoxy] ******************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [cheburara-1]
 ok: [cheburara-2]
+ok: [cheburara-1]
 
 TASK [haproxy : Installation HAProxy] ******************************************
 ok: [cheburara-1]
@@ -6287,8 +6579,8 @@ ok: [cheburara-1]
 ok: [cheburara-2]
 
 TASK [haproxy : Ensure HAProxy exporter is enabled] ****************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [keepalived : Installation of Keepalived] *********************************
 ok: [cheburara-1]
@@ -6299,8 +6591,8 @@ ok: [cheburara-1]
 ok: [cheburara-2]
 
 TASK [keepalived : Create home directory for keepalived_script user] ***********
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [keepalived : Create configuration for keepalived_script] *****************
 ok: [cheburara-1]
@@ -6341,28 +6633,28 @@ ok: [cheburara-1]
 ok: [cheburara-2]
 
 TASK [docker : Install Docker packages] ****************************************
-ok: [cheburara-1]
 ok: [cheburara-2]
+ok: [cheburara-1]
 
 TASK [docker : Enable Docker service] ******************************************
 ok: [cheburara-1]
 ok: [cheburara-2]
 
 TASK [agama : Create Agama directory] ******************************************
-ok: [cheburara-1]
 ok: [cheburara-2]
+ok: [cheburara-1]
 
 TASK [agama : Download AGAMA Application] **************************************
 ok: [cheburara-1]
 ok: [cheburara-2]
 
 TASK [agama : Download Dockerfile] *********************************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [agama : Build Docker image for Agama] ************************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [agama : Start Agama containers] ******************************************
 ok: [cheburara-2] => (item=None)
@@ -6373,16 +6665,16 @@ ok: [cheburara-1] => (item=None)
 ok: [cheburara-1]
 
 TASK [nginx : Install Nginx] ***************************************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [nginx : Copy custom Nginx default configuration] *************************
 ok: [cheburara-2]
 ok: [cheburara-1]
 
 TASK [nginx : Start Nginx and enable it at boot] *******************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [nginx : Include Exporter Tasks] ******************************************
 included: /home/cheba/ica0002/roles/nginx/tasks/exporters/main.yaml for cheburara-1, cheburara-2
@@ -6392,27 +6684,25 @@ ok: [cheburara-1]
 ok: [cheburara-2]
 
 TASK [nginx : Enable exporter service] *****************************************
-ok: [cheburara-1]
 ok: [cheburara-2]
+ok: [cheburara-1]
 
 PLAY RECAP *********************************************************************
-cheburara-1                : ok=75   changed=0    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
-cheburara-2                : ok=75   changed=0    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+cheburara-1                : ok=76   changed=0    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+cheburara-2                : ok=76   changed=0    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
 cheburara-3                : ok=74   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
-cheburara-3 | CHANGED => {
-    "changed": true,
-    "elapsed": 36,
-    "rebooted": true
+cheburara-3 | FAILED! => {
+    "msg": "Timeout (12s) waiting for privilege escalation prompt: "
 }
 cheburara-2 | CHANGED => {
     "changed": true,
-    "elapsed": 44,
+    "elapsed": 42,
     "rebooted": true
 }
 cheburara-1 | CHANGED => {
     "changed": true,
-    "elapsed": 43,
+    "elapsed": 46,
     "rebooted": true
 }
 [WARNING]: Collection community.general does not support Ansible version 2.10.8
@@ -6420,101 +6710,101 @@ cheburara-1 | CHANGED => {
 PLAY [Initial setup] ***********************************************************
 
 TASK [Gathering Facts] *********************************************************
+ok: [cheburara-1]
 ok: [cheburara-2]
 ok: [cheburara-3]
-ok: [cheburara-1]
 
 TASK [init : Update APT cache] *************************************************
-ok: [cheburara-3]
 ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-3]
 
 TASK [init : Install Prometheus Node Exporter] *********************************
+ok: [cheburara-1]
 ok: [cheburara-2]
 ok: [cheburara-3]
-ok: [cheburara-1]
 
 TASK [init : Start and Enable Node Exporter Service] ***************************
 ok: [cheburara-2]
-ok: [cheburara-3]
 ok: [cheburara-1]
+ok: [cheburara-3]
 
 TASK [init : Install up-to-date CA certificates] *******************************
+ok: [cheburara-1]
 ok: [cheburara-2]
 ok: [cheburara-3]
-ok: [cheburara-1]
 
 TASK [init : Install rsyslog] **************************************************
+ok: [cheburara-1]
 ok: [cheburara-2]
 ok: [cheburara-3]
-ok: [cheburara-1]
 
 TASK [init : Create a custom rsyslog configuration file] ***********************
-ok: [cheburara-3]
-ok: [cheburara-1]
 ok: [cheburara-2]
+ok: [cheburara-1]
+ok: [cheburara-3]
 
 TASK [init : Modify a custom rsyslog configuration file] ***********************
+ok: [cheburara-1]
 ok: [cheburara-2]
 ok: [cheburara-3]
-ok: [cheburara-1]
 
 TASK [init : Ensure the user 'backup' exists with a unique SSH key] ************
 ok: [cheburara-1]
-ok: [cheburara-3]
 ok: [cheburara-2]
+ok: [cheburara-3]
 
 TASK [init : Create known_hosts file for user backup] **************************
-ok: [cheburara-3]
 ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-3]
 
 TASK [init : Ensure /home/backup/restore directory exists] *********************
-ok: [cheburara-3]
 ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-3]
 
 TASK [init : Ensure Duplicity is installed] ************************************
 ok: [cheburara-2]
-ok: [cheburara-3]
 ok: [cheburara-1]
+ok: [cheburara-3]
 
 PLAY [DNS server] **************************************************************
 
 TASK [Gathering Facts] *********************************************************
+ok: [cheburara-1]
 ok: [cheburara-3]
 ok: [cheburara-2]
-ok: [cheburara-1]
 
 TASK [bind : Install Bind9 package] ********************************************
+ok: [cheburara-1]
 ok: [cheburara-2]
 ok: [cheburara-3]
-ok: [cheburara-1]
 
 TASK [bind : Create configuration bind9 file] **********************************
-ok: [cheburara-3]
 ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-3]
 
 TASK [bind : Create configuration bind9 for master and slave] ******************
-ok: [cheburara-3]
 ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-3]
 
 TASK [bind : Create DNS Zone File if not existing] *****************************
+ok: [cheburara-1]
 ok: [cheburara-3]
 ok: [cheburara-2]
-ok: [cheburara-1]
 
 TASK [bind : Create DNS Reverse Zone File if not existing] *********************
 ok: [cheburara-2]
-ok: [cheburara-3]
 ok: [cheburara-1]
+ok: [cheburara-3]
 
 TASK [bind : Ensure bind9 service is started and enabled] **********************
-ok: [cheburara-3]
 ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-3]
 
 TASK [bind : Add A record for backup server using nsupdate] ********************
 skipping: [cheburara-1]
@@ -6525,6 +6815,7 @@ TASK [bind : Add CNAME record] *************************************************
 skipping: [cheburara-1] => (item=None) 
 skipping: [cheburara-1] => (item=None) 
 skipping: [cheburara-1] => (item=None) 
+skipping: [cheburara-2] => (item=None) 
 skipping: [cheburara-1] => (item=None) 
 skipping: [cheburara-2] => (item=None) 
 skipping: [cheburara-1] => (item=None) 
@@ -6541,7 +6832,6 @@ skipping: [cheburara-1] => (item=None)
 skipping: [cheburara-2] => (item=None) 
 skipping: [cheburara-1] => (item=None) 
 skipping: [cheburara-1]
-skipping: [cheburara-2] => (item=None) 
 skipping: [cheburara-2] => (item=None) 
 skipping: [cheburara-2] => (item=None) 
 skipping: [cheburara-2] => (item=None) 
@@ -6568,52 +6858,56 @@ TASK [bind : Include Exporter Tasks] *******************************************
 included: /home/cheba/ica0002/roles/bind/tasks/exporters/main.yaml for cheburara-3, cheburara-1, cheburara-2
 
 TASK [bind : Install Bind9 exporter from Ubuntu package repository] ************
-ok: [cheburara-3]
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
+ok: [cheburara-3]
 
 TASK [bind : Enable Bind9 exporter] ********************************************
 ok: [cheburara-2]
-ok: [cheburara-3]
 ok: [cheburara-1]
+ok: [cheburara-3]
 
 PLAY [Resolver] ****************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [cheburara-3]
 ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-3]
 
 TASK [resolver : Configure /etc/resolv.conf] ***********************************
 ok: [cheburara-2]
-ok: [cheburara-3]
 ok: [cheburara-1]
+ok: [cheburara-3]
 
 PLAY [Database server] *********************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [mysql : Install MySQL Server package] ************************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [mysql : Install PyMySQL package] *****************************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [mysql : Create override.cnf file] ****************************************
 ok: [cheburara-2]
 ok: [cheburara-1]
+
+TASK [mysql : Ensure mysql service is started and enabled] *********************
+ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [mysql : MySQL database] **************************************************
 ok: [cheburara-2]
 ok: [cheburara-1]
 
 TASK [mysql : MySQL user] ******************************************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [mysql : Include Exporter Tasks] ******************************************
 included: /home/cheba/ica0002/roles/mysql/tasks/exporters/main.yaml for cheburara-1, cheburara-2
@@ -6627,8 +6921,8 @@ ok: [cheburara-2]
 ok: [cheburara-1]
 
 TASK [mysql : Create ~/.my.cnf for Exporter User] ******************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [mysql : Update Prometheus MySQL Exporter for Replication Metrics] ********
 ok: [cheburara-2]
@@ -6639,8 +6933,8 @@ ok: [cheburara-2]
 ok: [cheburara-1]
 
 TASK [mysql : Ensure mysql service is started and enabled] *********************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [mysql : Ensure /home/backup/mysql directory exists] **********************
 ok: [cheburara-2]
@@ -6830,12 +7124,12 @@ ok: [cheburara-3]
 PLAY [HAPoxy] ******************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [haproxy : Installation HAProxy] ******************************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [haproxy : HAProxy Configuration] *****************************************
 ok: [cheburara-2]
@@ -6858,16 +7152,16 @@ ok: [cheburara-2]
 ok: [cheburara-1]
 
 TASK [keepalived : Installation of Keepalived] *********************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [keepalived : Create keepalived_script user] ******************************
 ok: [cheburara-2]
 ok: [cheburara-1]
 
 TASK [keepalived : Create home directory for keepalived_script user] ***********
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [keepalived : Create configuration for keepalived_script] *****************
 ok: [cheburara-2]
@@ -6908,12 +7202,12 @@ ok: [cheburara-2]
 ok: [cheburara-1]
 
 TASK [docker : Install Docker packages] ****************************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [docker : Enable Docker service] ******************************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [agama : Create Agama directory] ******************************************
 ok: [cheburara-2]
@@ -6934,18 +7228,18 @@ ok: [cheburara-1]
 TASK [agama : Start Agama containers] ******************************************
 ok: [cheburara-2] => (item=None)
 ok: [cheburara-1] => (item=None)
-ok: [cheburara-2] => (item=None)
-ok: [cheburara-2]
 ok: [cheburara-1] => (item=None)
 ok: [cheburara-1]
+ok: [cheburara-2] => (item=None)
+ok: [cheburara-2]
 
 TASK [nginx : Install Nginx] ***************************************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [nginx : Copy custom Nginx default configuration] *************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [nginx : Start Nginx and enable it at boot] *******************************
 ok: [cheburara-2]
@@ -6955,16 +7249,16 @@ TASK [nginx : Include Exporter Tasks] ******************************************
 included: /home/cheba/ica0002/roles/nginx/tasks/exporters/main.yaml for cheburara-1, cheburara-2
 
 TASK [nginx : Install Nginx exporter from Ubuntu package repository] ***********
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 TASK [nginx : Enable exporter service] *****************************************
-ok: [cheburara-2]
 ok: [cheburara-1]
+ok: [cheburara-2]
 
 PLAY RECAP *********************************************************************
-cheburara-1                : ok=75   changed=0    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
-cheburara-2                : ok=75   changed=0    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+cheburara-1                : ok=76   changed=0    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+cheburara-2                : ok=76   changed=0    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
 cheburara-3                : ok=74   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
-T 19 dets  2023 15:22:33 EET
+K 20 dets  2023 13:01:08 EET
