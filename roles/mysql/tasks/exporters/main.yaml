@@ -13,12 +13,14 @@
     login_unix_socket: /var/run/mysqld/mysqld.sock
     state: present
   no_log: true
+  notify: Restart Prometheus MySQL Exporter
 
 - name: Create ~/.my.cnf for Exporter User
   template:
     src: my.cnf.j2
     dest: /var/lib/prometheus/.my.cnf
   no_log: true
+  notify: Restart Prometheus MySQL Exporter
 
 - name: Update Prometheus MySQL Exporter for Replication Metrics
   lineinfile:
